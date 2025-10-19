@@ -12,32 +12,30 @@ export default function HeroSection() {
 
   return (
     <>
-      <div className="hero-container">
-        <div className="hero-content">
-          {/* Logo at top left */}
-          <div className="logo-container">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-content">
+          <div className="navbar-logo">
             <Image
               src="/logo.png"
               alt="Iron & Water Co. Logo"
-              width={120}
-              height={120}
-              className="logo"
+              width={60}
+              height={60}
+              className="navbar-logo-img"
             />
+            <span className="navbar-title">Iron & Water Co.</span>
           </div>
+        </div>
+      </nav>
 
-          {/* Centered text content */}
+      {/* Hero Section */}
+      <div className="hero-container">
+        <div className="hero-content">
           <div className="hero-text">
-            <h1 className="hero-headline">Iron & Water Co.</h1>
-            <h2 className="hero-subtitle">Coming to Miracle Mile</h2>
+            <h1 className="hero-headline">Elevating The Design Trade Through Exceptional Detail, Service, And Partnership</h1>
             <p className="hero-description">
-              Early access for designers, architects, builders & homeowners.
+              Coming soon to Miracle Mile. Early access for designers, architects, builders & homeowners. Soft opening November 2025 and grand opening 2026.
             </p>
-            
-            {/* Opening Dates */}
-            <div className="opening-dates">
-              <p className="opening-date">Soft Opening November 2025</p>
-              <p className="opening-date">Grand Opening 2026</p>
-            </div>
             
             {/* CTA Button */}
             <button className="cta-button" onClick={openModal}>
@@ -46,6 +44,18 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-address">
+            <p>1506 Northern Blvd. Manhasset, NY 11030</p>
+          </div>
+          <div className="footer-copyright">
+            <p>&copy; 2025 Iron & Water Co. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
 
       {/* Modal */}
       <FormModal isOpen={isModalOpen} onClose={closeModal} />
