@@ -71,14 +71,6 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
         
         {isSubmitted ? (
           <div className="success-message">
-            <div className="checkmark-container">
-              <div className="checkmark">
-                <div className="checkmark-circle">
-                  <div className="checkmark-stem"></div>
-                  <div className="checkmark-kick"></div>
-                </div>
-              </div>
-            </div>
             <h2 className="success-title">You're on the list.</h2>
             <p className="success-text">We'll reach out with early previews and VIP invites.</p>
             <button className="close-button" onClick={handleClose}>

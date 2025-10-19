@@ -100,7 +100,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 25%, #2b6cb0 75%, #1a365d 100%);
   position: relative;
 }
 
@@ -111,8 +111,20 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.05"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  opacity: 0.3;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="metal" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="none"/><path d="M0,0 L20,20 M20,0 L0,20" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23metal)"/></svg>');
+  opacity: 0.4;
+}
+
+.hero-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 30%, rgba(107, 114, 128, 0.1) 0%, transparent 50%);
+  opacity: 0.6;
 }
 
 .hero-content {
@@ -464,82 +476,6 @@ body {
 .success-message {
   text-align: center;
   padding: 2rem 0;
-}
-
-.checkmark-container {
-  margin-bottom: 2rem;
-}
-
-.checkmark {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-  position: relative;
-}
-
-.checkmark-circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  position: relative;
-  animation: checkmark-circle 0.6s ease-in-out;
-}
-
-.checkmark-stem {
-  position: absolute;
-  width: 4px;
-  height: 0;
-  background-color: white;
-  left: 32px;
-  top: 45px;
-  transform: rotate(45deg);
-  transform-origin: bottom center;
-  animation: checkmark-stem 0.4s ease-in-out 0.6s both;
-}
-
-.checkmark-kick {
-  position: absolute;
-  width: 0;
-  height: 4px;
-  background-color: white;
-  left: 40px;
-  top: 55px;
-  transform: rotate(-45deg);
-  transform-origin: left center;
-  animation: checkmark-kick 0.3s ease-in-out 1s both;
-}
-
-@keyframes checkmark-circle {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes checkmark-stem {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 20px;
-  }
-}
-
-@keyframes checkmark-kick {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 12px;
-  }
 }
 
 .success-title {
