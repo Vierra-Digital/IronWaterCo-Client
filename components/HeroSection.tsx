@@ -15,15 +15,20 @@ export default function HeroSection() {
       {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-content">
-          <div className="navbar-logo">
-            <Image
-              src="/logo.png"
-              alt="Iron & Water Co. Logo"
-              width={60}
-              height={60}
-              className="navbar-logo-img"
-            />
-            <span className="navbar-title">Iron & Water Co.</span>
+          <div className="navbar-brand">
+            <div className="navbar-logo">
+              <Image
+                src="/logo.png"
+                alt="Iron & Water Co. Logo"
+                width={80}
+                height={80}
+                className="navbar-logo-img"
+              />
+            </div>
+            <div className="navbar-text">
+              <span className="navbar-title">Iron & Water Co.</span>
+              <span className="navbar-address">1506 Northern Blvd. Manhasset, NY 11030</span>
+            </div>
           </div>
         </div>
       </nav>
