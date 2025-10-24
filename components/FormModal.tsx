@@ -79,7 +79,7 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
           </div>
         ) : (
           <>
-            <h2 className="modal-title">Get Early Access</h2>
+            <h2 className="modal-title">Join Our Founders Circle</h2>
             <p className="modal-subtitle">Join our exclusive preview for designers, architects, builders & homeowners.</p>
             
             <form className="modal-form" onSubmit={handleSubmit}>
@@ -201,15 +201,15 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
               </div>
 
               <div className="form-group checkbox-group">
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="foundersPreview"
-                    checked={formData.foundersPreview}
-                    onChange={handleInputChange}
-                  />
-                  Yes—invite me to the Founders Preview.
-                </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="foundersPreview"
+                  checked={formData.foundersPreview}
+                  onChange={handleInputChange}
+                />
+                Invite Me To Soft Opening
+              </label>
               </div>
 
               <button type="submit" className="submit-button">

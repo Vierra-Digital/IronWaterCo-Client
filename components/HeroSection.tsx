@@ -20,14 +20,13 @@ export default function HeroSection() {
               <Image
                 src="/logo.png"
                 alt="Iron & Water Co. Logo"
-                width={80}
-                height={80}
+                width={50}
+                height={50}
                 className="navbar-logo-img"
               />
             </div>
             <div className="navbar-text">
               <span className="navbar-title">Iron & Water Co.</span>
-              <span className="navbar-address">1506 Northern Blvd. Manhasset, NY 11030</span>
             </div>
           </div>
         </div>
@@ -44,7 +43,7 @@ export default function HeroSection() {
             
             {/* CTA Button */}
             <button className="cta-button" onClick={openModal}>
-              Get Early Access
+              Join Our Founders Circle
             </button>
           </div>
         </div>
