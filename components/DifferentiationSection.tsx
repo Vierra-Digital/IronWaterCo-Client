@@ -136,7 +136,7 @@ export default function DifferentiationSection() {
           {features.map((feature, index) => (
             <div
               key={index}
-              ref={(el) => (itemsRef.current[index] = el)}
+              ref={(el) => { itemsRef.current[index] = el; }}
               className="diff-item fade-in"
             >
               <div className="diff-icon">{feature.icon}</div>
