@@ -54,7 +54,7 @@ export default function WhatWeDoDifferently() {
           {features.map((feature, index) => (
             <div
               key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
+              ref={(el) => { cardsRef.current[index] = el; }}
               className="feature-card fade-in"
             >
               <h3>{feature.title}</h3>

@@ -63,7 +63,7 @@ export default function TimelineSection() {
           {steps.map((step, index) => (
             <div
               key={index}
-              ref={(el) => (stepsRef.current[index] = el)}
+              ref={(el) => { stepsRef.current[index] = el; }}
               className="timeline-step fade-in"
             >
               <div className="step-number">{step.number}</div>

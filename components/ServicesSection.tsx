@@ -46,7 +46,7 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <div
               key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
+              ref={(el) => { cardsRef.current[index] = el; }}
               className="service-card fade-in"
             >
               <h3>{service.title}</h3>
