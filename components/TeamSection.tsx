@@ -34,7 +34,7 @@ export default function TeamSection() {
         <h2 className="section-title">Our A-Star Team</h2>
         <div className="team-grid">
           <div
-            ref={(el) => (membersRef.current[0] = el)}
+            ref={(el) => { membersRef.current[0] = el; }}
             className="team-member fade-in"
           >
             <div className="team-photo">R</div>
@@ -43,7 +43,7 @@ export default function TeamSection() {
           </div>
           
           <div
-            ref={(el) => (membersRef.current[1] = el)}
+            ref={(el) => { membersRef.current[1] = el; }}
             className="team-member fade-in"
           >
             <div className="team-photo">R</div>
@@ -52,7 +52,7 @@ export default function TeamSection() {
           </div>
           
           <div
-            ref={(el) => (membersRef.current[2] = el)}
+            ref={(el) => { membersRef.current[2] = el; }}
             className="team-member fade-in"
           >
             <div className="team-photo">E</div>
@@ -61,7 +61,7 @@ export default function TeamSection() {
           </div>
           
           <div
-            ref={(el) => (membersRef.current[3] = el)}
+            ref={(el) => { membersRef.current[3] = el; }}
             className="team-member fade-in"
           >
             <div className="team-photo">C</div>
@@ -70,7 +70,7 @@ export default function TeamSection() {
           </div>
           
           <div
-            ref={(el) => (membersRef.current[4] = el)}
+            ref={(el) => { membersRef.current[4] = el; }}
             className="team-member fade-in"
           >
             <div className="team-photo team-photo-image">
