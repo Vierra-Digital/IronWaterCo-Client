@@ -55,22 +55,13 @@ export default function TeamSection() {
             ref={(el) => { membersRef.current[2] = el; }}
             className="team-member fade-in"
           >
-            <div className="team-photo">E</div>
-            <h3>Ebony Howard</h3>
-            <p className="team-role">Customer Concierge</p>
-          </div>
-          
-          <div
-            ref={(el) => { membersRef.current[3] = el; }}
-            className="team-member fade-in"
-          >
             <div className="team-photo">C</div>
             <h3>Carissa Fishman</h3>
             <p className="team-role">Operations</p>
           </div>
           
           <div
-            ref={(el) => { membersRef.current[4] = el; }}
+            ref={(el) => { membersRef.current[3] = el; }}
             className="team-member fade-in"
           >
             <div className="team-photo team-photo-image">

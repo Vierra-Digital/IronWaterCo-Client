@@ -60,7 +60,7 @@ export default function HeroSection() {
             <a href="#reviews" className="nav-link">Reviews</a>
             <a href="#team" className="nav-link">Team</a>
             <a href="#contact" className="nav-link">Contact</a>
-            <button className="nav-cta" onClick={openModal}>Join Our Trade Network</button>
+            <button className="nav-cta" onClick={openModal}>Join Our Founders Circle</button>
           </div>
         </div>
       </nav>
