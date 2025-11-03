@@ -30,6 +30,8 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
     foundersPreview: false
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
@@ -39,14 +41,38 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    setIsSubmitted(true)
+    setIsSubmitting(true)
+    setError(null)
+
+    try {
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form')
+      }
+
+      setIsSubmitted(true)
+    } catch (err: any) {
+      console.error('Form submission error:', err)
+      setError(err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleClose = () => {
     setIsSubmitted(false)
+    setError(null)
     setFormData({
       name: '',
       company: '',
@@ -83,6 +109,19 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
             <p className="modal-subtitle">Join our exclusive preview for designers, architects, builders & homeowners.</p>
             
             <form className="modal-form" onSubmit={handleSubmit}>
+              {error && (
+                <div className="error-message" style={{
+                  padding: '12px',
+                  backgroundColor: '#fee',
+                  border: '1px solid #fcc',
+                  borderRadius: '8px',
+                  color: '#c33',
+                  marginBottom: '20px',
+                  fontSize: '14px'
+                }}>
+                  {error}
+                </div>
+              )}
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="name">Name *</label>
@@ -212,8 +251,8 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
               </label>
               </div>
 
-              <button type="submit" className="submit-button">
-                Get Early Access
+              <button type="submit" className="submit-button" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting...' : 'Get Early Access'}
               </button>
             </form>
           </>
