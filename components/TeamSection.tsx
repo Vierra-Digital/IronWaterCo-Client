@@ -56,7 +56,7 @@ export default function TeamSection() {
             className="team-member fade-in"
           >
             <div className="team-photo">C</div>
-            <h3>Carissa Fishman</h3>
+            <h3>Carissa Ahearn</h3>
             <p className="team-role">Operations</p>
           </div>
           
