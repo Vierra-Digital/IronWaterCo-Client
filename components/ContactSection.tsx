@@ -73,7 +73,7 @@ export default function ContactSection() {
                   </svg>
                   <div>
                     <strong>Email</strong>
-                    <p><a href="mailto:customercare@ironandwaterco.com" target="_blank" rel="noopener noreferrer">customercare@ironandwaterco.com</a></p>
+                    <p><a href="mailto:customerexperience@ironandwaterco.com" target="_blank" rel="noopener noreferrer">customerexperience@ironandwaterco.com</a></p>
                   </div>
                 </div>
                 <div className="contact-item">

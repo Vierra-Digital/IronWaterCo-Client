@@ -288,7 +288,7 @@ export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
       <div class="footer-text" style="margin-top: 20px;">
         1506 Northern Blvd<br>
         Manhasset, NY 11030<br>
-        <a href="mailto:customercare@ironandwaterco.com" style="color: #d4af37; text-decoration: none;">customercare@ironandwaterco.com</a><br>
+        <a href="mailto:customerexperience@ironandwaterco.com" style="color: #d4af37; text-decoration: none;">customerexperience@ironandwaterco.com</a><br>
         329-233-6638
       </div>
     </div>
@@ -498,7 +498,7 @@ export async function sendNotificationEmail(data: NotificationEmailData): Promis
       <div class="footer-text" style="margin-top: 20px;">
         1506 Northern Blvd<br>
         Manhasset, NY 11030<br>
-        <a href="mailto:customercare@ironandwaterco.com" style="color: #d4af37; text-decoration: none;">customercare@ironandwaterco.com</a><br>
+        <a href="mailto:customerexperience@ironandwaterco.com" style="color: #d4af37; text-decoration: none;">customerexperience@ironandwaterco.com</a><br>
         329-233-6638
       </div>
     </div>

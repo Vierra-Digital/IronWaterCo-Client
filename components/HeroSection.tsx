@@ -141,7 +141,7 @@ export default function HeroSection() {
               <h3>Contact</h3>
               <p>1506 Northern Blvd</p>
               <p>Manhasset, NY 11030</p>
-              <p><a href="mailto:customercare@ironandwaterco.com" target="_blank" rel="noopener noreferrer" className="footer-link">customercare@ironandwaterco.com</a></p>
+              <p><a href="mailto:customerexperience@ironandwaterco.com" target="_blank" rel="noopener noreferrer" className="footer-link">customerexperience@ironandwaterco.com</a></p>
               <p>329-233-6638</p>
             </div>
             
@@ -149,7 +149,6 @@ export default function HeroSection() {
               <h3>Connect</h3>
               <p><a href="https://www.linkedin.com/company/iron-water-co/" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a></p>
               <p>Instagram</p>
-              <p>Facebook</p>
               <p>Alignable</p>
             </div>
             
