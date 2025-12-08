@@ -37,47 +37,81 @@ export default function TeamSection() {
             ref={(el) => { membersRef.current[0] = el; }}
             className="team-member fade-in"
           >
-            <div className="team-photo">R</div>
-            <h3>Richard Segal</h3>
-            <p className="team-role">General Manager</p>
+            <div className="team-card">
+              <div className="team-photo-wrapper">
+                <div className="team-photo team-photo-image">
+                  <Image src="/Richard-Segal.jpeg" alt="Richard Segal" width={100} height={100} style={{ objectFit: 'cover' }} />
+                </div>
+              </div>
+              <div className="team-info">
+                <h3>Richard Segal</h3>
+                <p className="team-role">General Manager</p>
+              </div>
+            </div>
           </div>
           
           <div
             ref={(el) => { membersRef.current[1] = el; }}
             className="team-member fade-in"
           >
-            <div className="team-photo">R</div>
-            <h3>Raynny Soto Rodriguez</h3>
-            <p className="team-role">Principal</p>
+            <div className="team-card">
+              <div className="team-photo-wrapper">
+                <div className="team-photo team-photo-image">
+                  <Image src="/Raynny-Soto.jpeg" alt="Raynny Soto Rodriguez" width={100} height={100} style={{ objectFit: 'cover' }} />
+                </div>
+              </div>
+              <div className="team-info">
+                <h3>Raynny Soto Rodriguez</h3>
+                <p className="team-role">Principal</p>
+              </div>
+            </div>
           </div>
           
           <div
             ref={(el) => { membersRef.current[2] = el; }}
             className="team-member fade-in"
           >
-            <div className="team-photo">E</div>
-            <h3>Ebony Howard</h3>
-            <p className="team-role">Customer Concierge</p>
+            <div className="team-card">
+              <div className="team-photo-wrapper">
+                <div className="team-photo">E</div>
+              </div>
+              <div className="team-info">
+                <h3>Ebony Howard</h3>
+                <p className="team-role">Customer Concierge</p>
+              </div>
+            </div>
           </div>
           
           <div
             ref={(el) => { membersRef.current[3] = el; }}
             className="team-member fade-in"
           >
-            <div className="team-photo">C</div>
-            <h3>Carissa Ahearn</h3>
-            <p className="team-role">Operations</p>
+            <div className="team-card">
+              <div className="team-photo-wrapper">
+                <div className="team-photo">C</div>
+              </div>
+              <div className="team-info">
+                <h3>Carissa Ahearn</h3>
+                <p className="team-role">Operations</p>
+              </div>
+            </div>
           </div>
           
           <div
             ref={(el) => { membersRef.current[4] = el; }}
             className="team-member fade-in"
           >
-            <div className="team-photo team-photo-image">
-              <Image src="/alex-shick.jpg" alt="Alex Shick" width={80} height={80} />
+            <div className="team-card">
+              <div className="team-photo-wrapper">
+                <div className="team-photo team-photo-image">
+                  <Image src="/alex-shick.JPG" alt="Alex Shick" width={100} height={100} style={{ objectFit: 'cover' }} />
+                </div>
+              </div>
+              <div className="team-info">
+                <h3>Alex Shick</h3>
+                <p className="team-role">IT & Systems</p>
+              </div>
             </div>
-            <h3>Alex Shick</h3>
-            <p className="team-role">IT & Systems</p>
           </div>
         </div>
       </div>

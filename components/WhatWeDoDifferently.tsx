@@ -50,15 +50,19 @@ export default function WhatWeDoDifferently() {
       <div className="container">
         <p className="section-subtitle">Excellence in Every Detail</p>
         <h2 className="section-title">What We Do Differently</h2>
-        <div className="features-grid">
+        <div className="features-flow">
           {features.map((feature, index) => (
             <div
               key={index}
               ref={(el) => { cardsRef.current[index] = el; }}
-              className="feature-card fade-in"
+              className="feature-item fade-in"
             >
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
+              <div className="feature-number">{String(index + 1).padStart(2, '0')}</div>
+              <div className="feature-content">
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </div>
+              {index < features.length - 1 && <div className="feature-divider"></div>}
             </div>
           ))}
         </div>

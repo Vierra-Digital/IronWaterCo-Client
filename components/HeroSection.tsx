@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import FormModal from './FormModal'
-import Preloader from './Preloader'
 import ServicesSection from './ServicesSection'
-import TimelineSection from './TimelineSection'
 import ReviewsSection from './ReviewsSection'
 import TeamSection from './TeamSection'
 import WhatWeDoDifferently from './WhatWeDoDifferently'
@@ -14,30 +12,19 @@ import ContactSection from './ContactSection'
 
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
 
-  const heroImages = [
-    { src: '/logo.png', alt: 'Design Excellence', caption: 'Elevated Craftsmanship' },
-    { src: '/logo.png', alt: 'Modern Hardware', caption: 'Precision Design' },
-    { src: '/logo.png', alt: 'Luxury Plumbing', caption: 'Exceptional Detail' },
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
-    }, 4000)
-
-    return () => clearInterval(interval)
-  }, [heroImages.length])
-
   return (
     <>
-      <Preloader />
       {/* Navbar */}
-      <nav className="navbar">
+      <nav className={`navbar ${isLoaded ? 'navbar-loaded' : ''}`}>
         <div className="navbar-content">
           <a href="#" className="navbar-brand">
             <div className="navbar-logo">
@@ -47,6 +34,7 @@ export default function HeroSection() {
                 width={50}
                 height={50}
                 className="navbar-logo-img"
+                style={{ objectFit: 'contain' }}
               />
             </div>
             <div className="navbar-text">
@@ -55,7 +43,6 @@ export default function HeroSection() {
           </a>
           <div className="navbar-links">
             <a href="#services" className="nav-link">Services</a>
-            <a href="#timeline" className="nav-link">Timeline</a>
             <a href="#differentiation" className="nav-link">Why Us</a>
             <a href="#reviews" className="nav-link">Reviews</a>
             <a href="#team" className="nav-link">Team</a>
@@ -67,7 +54,7 @@ export default function HeroSection() {
 
       {/* Hero Section */}
       <div className="hero-container">
-        <div className="hero-content">
+        <div className={`hero-content ${isLoaded ? 'hero-content-loaded' : ''}`}>
           <div className="hero-text">
             <h1 className="hero-headline">Elevating the Design Trade Through Exceptional Detail, Service, and Partnership</h1>
             <p className="hero-intro">
@@ -81,23 +68,6 @@ export default function HeroSection() {
               </button>
             </div>
           </div>
-          <div className="hero-image-scroller">
-            <div className="scroller-wrapper-hero">
-              <div className="scroller-track-hero">
-                {heroImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`scroller-slide-hero ${index === currentImageIndex ? 'active' : ''}`}
-                    style={{ transform: `translateX(${(index - currentImageIndex) * 100}%)` }}
-                  >
-                    <div className="scroller-image-hero">
-                      <Image src={image.src} alt={image.alt} width={600} height={400} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -106,8 +76,6 @@ export default function HeroSection() {
       {/* Services Section */}
       <ServicesSection />
 
-      {/* Timeline Section */}
-      <TimelineSection />
 
 
       {/* Differentiation Section */}
@@ -162,7 +130,9 @@ export default function HeroSection() {
         {/* Copyright bar */}
         <div className="footer-bar">
           <div className="container">
-            <p>&copy; 2025 Iron & Water Co. All rights reserved.</p>
+            <p>
+              &copy; 2025 Iron & Water Co. All rights reserved. | Powered by <a href="https://vierradev.com" target="_blank" rel="noopener noreferrer" className="footer-powered-link">Vierra Digital</a>
+            </p>
           </div>
         </div>
       </footer>

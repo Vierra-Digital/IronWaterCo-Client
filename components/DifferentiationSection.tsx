@@ -132,22 +132,31 @@ export default function DifferentiationSection() {
       <div className="container">
         <p className="section-subtitle">Built for Excellence</p>
         <h2 className="section-title">Why Iron & Water Co.?</h2>
-        <div className="differentiation-grid">
+        
+        <div className="differentiation-features">
           {features.map((feature, index) => (
             <div
               key={index}
               ref={(el) => { itemsRef.current[index] = el; }}
-              className="diff-item fade-in"
+              className="feature-row fade-in"
             >
-              <div className="diff-icon">{feature.icon}</div>
-              <p>{feature.text}</p>
+              <div className="feature-icon-container">
+                {feature.icon}
+              </div>
+              <div className="feature-content">
+                <p className="feature-text">{feature.text}</p>
+              </div>
             </div>
           ))}
         </div>
-        <p className="differentiation-close">
-          "Because when you work with us, you don't just choose fixtures. You shape legacy."
-        </p>
-        <div className="stats-grid">
+
+        <div className="differentiation-quote">
+          <p className="quote-text">
+            "Because when you work with us, you don't just choose fixtures. You shape legacy."
+          </p>
+        </div>
+
+        <div className="stats-showcase">
           <AnimatedCounter target={60} label="Years of Combined Experience" suffix="+" />
           <AnimatedCounter target={10000} label="Successful Projects" suffix="+" />
           <AnimatedCounter target={500} label="Satisfied Clients" suffix="+" />

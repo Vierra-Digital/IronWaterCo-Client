@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface FormData {
   name: string
@@ -86,6 +86,18 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
     onClose()
   }
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
@@ -110,19 +122,11 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
             
             <form className="modal-form" onSubmit={handleSubmit}>
               {error && (
-                <div className="error-message" style={{
-                  padding: '12px',
-                  backgroundColor: '#fee',
-                  border: '1px solid #fcc',
-                  borderRadius: '8px',
-                  color: '#c33',
-                  marginBottom: '20px',
-                  fontSize: '14px'
-                }}>
+                <div className="error-message">
                   {error}
                 </div>
               )}
-              <div className="form-row">
+              <div className="form-grid">
                 <div className="form-group">
                   <label htmlFor="name">Name *</label>
                   <input
@@ -135,35 +139,6 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="company">Company</label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="role">Role *</label>
-                  <select
-                    id="role"
-                    name="role"
-                    value={formData.role}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    <option value="">Select your role</option>
-                    <option value="Designer">Designer</option>
-                    <option value="Architect">Architect</option>
-                    <option value="Builder">Builder</option>
-                    <option value="Homeowner">Homeowner</option>
-                  </select>
-                </div>
-                <div className="form-group">
                   <label htmlFor="email">Email *</label>
                   <input
                     type="email"
@@ -174,9 +149,32 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
                     required
                   />
                 </div>
-              </div>
-
-              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="role">Role *</label>
+                  <select
+                    id="role"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <option value="">Select role</option>
+                    <option value="Designer">Designer</option>
+                    <option value="Architect">Architect</option>
+                    <option value="Builder">Builder</option>
+                    <option value="Homeowner">Homeowner</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="company">Company</label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                  />
+                </div>
                 <div className="form-group">
                   <label htmlFor="phone">Phone</label>
                   <input
@@ -240,15 +238,15 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
               </div>
 
               <div className="form-group checkbox-group">
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="foundersPreview"
-                  checked={formData.foundersPreview}
-                  onChange={handleInputChange}
-                />
-                Invite Me To Soft Opening
-              </label>
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    name="foundersPreview"
+                    checked={formData.foundersPreview}
+                    onChange={handleInputChange}
+                  />
+                  Invite Me To Soft Opening
+                </label>
               </div>
 
               <button type="submit" className="submit-button" disabled={isSubmitting}>
