@@ -116,7 +116,7 @@ export default function HeroSection() {
             <div className="footer-column">
               <h3>Connect</h3>
               <p><a href="https://www.linkedin.com/company/iron-water-co/" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a></p>
-              <p>Instagram</p>
+              <p><a href="https://www.instagram.com/ironandwaterco/" target="_blank" rel="noopener noreferrer" className="footer-link">Instagram</a></p>
               <p>Alignable</p>
             </div>
             
