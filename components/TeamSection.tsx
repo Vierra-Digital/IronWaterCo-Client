@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 
 export default function TeamSection() {
-  const membersRef = useRef<(HTMLDivElement | null)[]>([])
+  const membersRef = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(

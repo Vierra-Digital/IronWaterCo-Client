@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 export default function ServicesSection() {
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const cardsRef = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
