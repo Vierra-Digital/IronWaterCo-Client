@@ -5,9 +5,9 @@ import Image from 'next/image'
 
 export default function ImageScroller() {
   const images = [
-    { src: '/logo.png', alt: 'Design Excellence', caption: 'Elevated Craftsmanship' },
-    { src: '/logo.png', alt: 'Modern Hardware', caption: 'Precision Design' },
-    { src: '/logo.png', alt: 'Luxury Plumbing', caption: 'Exceptional Detail' },
+    { src: '/logo.png', alt: 'Iron & Water Co. Architectural Hardware - Design Excellence and Elevated Craftsmanship', caption: 'Elevated Craftsmanship' },
+    { src: '/logo.png', alt: 'Modern Architectural Hardware and Plumbing Fixtures - Precision Design for Trade Professionals', caption: 'Precision Design' },
+    { src: '/logo.png', alt: 'Luxury Plumbing Fixtures and Architectural Hardware - Exceptional Detail for Designers and Architects', caption: 'Exceptional Detail' },
   ]
 
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -34,7 +34,14 @@ export default function ImageScroller() {
                 style={{ transform: `translateX(${(index - currentIndex) * 100}%)` }}
               >
                 <div className="scroller-image">
-                  <Image src={image.src} alt={image.alt} width={600} height={400} />
+                  <Image 
+                    src={image.src} 
+                    alt={image.alt} 
+                    width={600} 
+                    height={400}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  />
                 </div>
                 <p className="scroller-caption">{image.caption}</p>
               </div>

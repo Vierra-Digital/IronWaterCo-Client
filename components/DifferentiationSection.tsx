@@ -128,10 +128,10 @@ export default function DifferentiationSection() {
   ]
 
   return (
-    <section id="differentiation" ref={sectionRef} className="differentiation-section">
+    <section id="differentiation" ref={sectionRef} className="differentiation-section" aria-labelledby="differentiation-heading">
       <div className="container">
         <p className="section-subtitle">Built for Excellence</p>
-        <h2 className="section-title">Why Iron & Water Co.?</h2>
+        <h2 id="differentiation-heading" className="section-title">Why Iron & Water Co.?</h2>
         
         <div className="differentiation-features">
           {features.map((feature, index) => (

@@ -114,23 +114,24 @@ export default function ServicesSection() {
   ]
 
   return (
-    <section id="services" className="services-section">
+    <section id="services" className="services-section" aria-labelledby="services-heading">
       <div className="container">
         <p className="section-subtitle">Authority Through Simplicity</p>
-        <h2 className="section-title">Services</h2>
-        <div className="services-grid">
+        <h2 id="services-heading" className="section-title">Services</h2>
+        <div className="services-grid" role="list">
           {services.map((service, index) => (
-            <div
+            <article
               key={index}
               ref={(el) => { cardsRef.current[index] = el; }}
               className="service-card fade-in"
+              role="listitem"
             >
-              <div className="service-icon-wrapper">
+              <div className="service-icon-wrapper" aria-hidden="true">
                 <div className="service-icon">{service.icon}</div>
               </div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-            </div>
+            </article>
           ))}
         </div>
       </div>

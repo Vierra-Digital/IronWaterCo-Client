@@ -1,0 +1,19 @@
+# robots.txt for Iron & Water Co.
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ironandwaterco.com/sitemap.xml
+
+# Disallow admin and private areas (if any exist in the future)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Allow important resources
+Allow: /api/submit-form
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
