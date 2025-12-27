@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   // SEO and Performance Optimizations
   compress: true,
   poweredByHeader: false, // Remove X-Powered-By header for security

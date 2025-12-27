@@ -1602,7 +1602,7 @@ section {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   gap: 3rem;
   margin-bottom: 0;
 }
@@ -2133,7 +2133,7 @@ section {
   }
   
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
   
@@ -2535,6 +2535,196 @@ section {
 
 .footer-link:hover {
   color: #d4af37;
+}
+
+/* Vendors Section Styles */
+.vendors-section {
+  background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 30%, #0f1419 60%, #1a1f2e 100%);
+  padding: 6rem 0;
+  padding-top: calc(80px + 10.67rem);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  margin-top: -80px;
+}
+
+.vendors-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.vendors-section .section-subtitle {
+  color: #d4af37;
+  position: relative;
+  z-index: 1;
+}
+
+.vendors-section .section-title {
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.vendors-intro {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.125rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+.vendors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.vendor-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.vendor-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vendor-card:hover::before {
+  transform: scaleX(1);
+}
+
+.vendor-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(212, 175, 55, 0.2);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+
+.vendor-name {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.vendors-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.vendor-email-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+  color: #1a202c;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.vendor-email-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%);
+}
+
+.vendor-email-button:active {
+  transform: translateY(0);
+}
+
+.vendor-email-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-link-active {
+  color: #d4af37 !important;
+}
+
+.nav-link-active::before {
+  width: 100% !important;
+}
+
+@media (max-width: 1024px) {
+  .vendors-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .vendors-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.875rem;
+  }
+  
+  .vendors-intro {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .vendor-card {
+    padding: 1.25rem;
+  }
+  
+  .vendor-name {
+    font-size: 0.9375rem;
+  }
+  
+  .vendors-cta {
+    margin-top: 3rem;
+    padding: 0 1rem;
+  }
+  
+  .vendor-email-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .vendors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 1024px) {

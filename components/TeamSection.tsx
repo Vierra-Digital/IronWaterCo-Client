@@ -96,42 +96,6 @@ export default function TeamSection() {
           >
             <div className="team-card">
               <div className="team-photo-wrapper">
-                <div className="team-photo" aria-label="Ebony Howard">E</div>
-              </div>
-              <div className="team-info">
-                <h3 itemProp="name">Ebony Howard</h3>
-                <p className="team-role" itemProp="jobTitle">Customer Concierge</p>
-              </div>
-            </div>
-          </article>
-          
-          <article
-            ref={(el) => { membersRef.current[3] = el; }}
-            className="team-member fade-in"
-            role="listitem"
-            itemScope
-            itemType="https://schema.org/Person"
-          >
-            <div className="team-card">
-              <div className="team-photo-wrapper">
-                <div className="team-photo" aria-label="Carissa Ahearn">C</div>
-              </div>
-              <div className="team-info">
-                <h3 itemProp="name">Carissa Ahearn</h3>
-                <p className="team-role" itemProp="jobTitle">Operations</p>
-              </div>
-            </div>
-          </article>
-          
-          <article
-            ref={(el) => { membersRef.current[4] = el; }}
-            className="team-member fade-in"
-            role="listitem"
-            itemScope
-            itemType="https://schema.org/Person"
-          >
-            <div className="team-card">
-              <div className="team-photo-wrapper">
                 <div className="team-photo team-photo-image">
                   <Image 
                     src="/alex-shick.JPG" 
@@ -146,6 +110,42 @@ export default function TeamSection() {
               <div className="team-info">
                 <h3 itemProp="name">Alex Shick</h3>
                 <p className="team-role" itemProp="jobTitle">IT & Systems</p>
+              </div>
+            </div>
+          </article>
+          
+          <article
+            ref={(el) => { membersRef.current[3] = el; }}
+            className="team-member fade-in"
+            role="listitem"
+            itemScope
+            itemType="https://schema.org/Person"
+          >
+            <div className="team-card">
+              <div className="team-photo-wrapper">
+                <div className="team-photo" aria-label="Ebony Howard">E</div>
+              </div>
+              <div className="team-info">
+                <h3 itemProp="name">Ebony Howard</h3>
+                <p className="team-role" itemProp="jobTitle">Customer Concierge</p>
+              </div>
+            </div>
+          </article>
+          
+          <article
+            ref={(el) => { membersRef.current[4] = el; }}
+            className="team-member fade-in"
+            role="listitem"
+            itemScope
+            itemType="https://schema.org/Person"
+          >
+            <div className="team-card">
+              <div className="team-photo-wrapper">
+                <div className="team-photo" aria-label="Carissa Ahearn">C</div>
+              </div>
+              <div className="team-info">
+                <h3 itemProp="name">Carissa Ahearn</h3>
+                <p className="team-role" itemProp="jobTitle">Operations</p>
               </div>
             </div>
           </article>
