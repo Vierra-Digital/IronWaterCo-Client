@@ -1,7 +1,6 @@
 {
-  "/guides/wall-hung-toilets-nyc-coop-condo/page": "app/guides/wall-hung-toilets-nyc-coop-condo/page.js",
-  "/knowledgebase/page": "app/knowledgebase/page.js",
   "/vendors/page": "app/vendors/page.js",
+  "/guides/wall-hung-toilets-nyc-coop-condo/page": "app/guides/wall-hung-toilets-nyc-coop-condo/page.js",
   "/faq/page": "app/faq/page.js",
   "/guides/wall-hung-toilets-in-wall-carriers-coop-approval/page": "app/guides/wall-hung-toilets-in-wall-carriers-coop-approval/page.js",
   "/page": "app/page.js"

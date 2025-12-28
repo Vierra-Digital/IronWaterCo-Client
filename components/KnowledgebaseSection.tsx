@@ -47,7 +47,7 @@ export default function KnowledgebaseSection() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [sortOrder, setSortOrder] = useState<SortOrder>('newest')
   const [showFilters, setShowFilters] = useState(false)
-  const guidesRef = useRef<(HTMLDivElement | null)[]>([])
+  const guidesRef = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
