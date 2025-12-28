@@ -31,6 +31,8 @@ export default function Footer() {
             <h3>Navigation</h3>
             <p><a href="/#services" className="footer-link">Services</a></p>
             <p><a href="/vendors" className="footer-link">Vendors</a></p>
+            <p><a href="/knowledgebase" className="footer-link">Knowledgebase</a></p>
+            <p><a href="/faq" className="footer-link">FAQ</a></p>
             <p><a href="/#contact" className="footer-link">Contact</a></p>
           </nav>
           
@@ -59,4 +61,5 @@ export default function Footer() {
     </footer>
   )
 }
+
 
