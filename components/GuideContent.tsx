@@ -241,7 +241,7 @@ export default function GuideContent() {
             </section>
 
             <section className="guide-section fade-in guide-share-section">
-              <h2>Share This Article</h2>
+              <h2>Share This Guide</h2>
               <p>Found this guide helpful? Share it with your team or colleagues.</p>
               <div className="guide-share-buttons">
                 <a
