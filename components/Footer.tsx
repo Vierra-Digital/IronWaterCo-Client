@@ -15,7 +15,7 @@ export default function Footer() {
                 loading="lazy"
               />
               <p className="footer-brand">Iron & Water Co.</p>
-              <p className="footer-tagline">"New inspiration every day."</p>
+              <p className="footer-tagline">"The Architecture of Beauty"</p>
             </div>
           </div>
           

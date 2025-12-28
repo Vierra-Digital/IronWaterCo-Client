@@ -284,7 +284,7 @@ export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
     
     <div class="footer">
       <div class="footer-brand">Iron & Water Co.</div>
-      <div class="footer-tagline">"New inspiration every day."</div>
+      <div class="footer-tagline">"The Architecture of Beauty"</div>
       <div class="footer-text" style="margin-top: 20px;">
         1506 Northern Blvd<br>
         Manhasset, NY 11030<br>
@@ -494,7 +494,7 @@ export async function sendNotificationEmail(data: NotificationEmailData): Promis
     
     <div class="footer">
       <div class="footer-brand">Iron & Water Co.</div>
-      <div class="footer-tagline">"New inspiration every day."</div>
+      <div class="footer-tagline">"The Architecture of Beauty"</div>
       <div class="footer-text" style="margin-top: 20px;">
         1506 Northern Blvd<br>
         Manhasset, NY 11030<br>
