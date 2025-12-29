@@ -2987,6 +2987,43 @@ section {
   visibility: visible !important;
 }
 
+.faq-contact-cta {
+  margin-top: 4rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.faq-contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+  color: #1a202c;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.faq-contact-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%);
+}
+
+.faq-contact-button:active {
+  transform: translateY(0);
+}
+
+.faq-contact-button svg {
+  width: 20px;
+  height: 20px;
+}
+
 .related-guides-section {
   margin-top: 6rem;
   padding-bottom: 2rem;
@@ -3127,6 +3164,15 @@ section {
   .faq-brands {
     font-size: 0.875rem;
     margin-top: 0.75rem;
+  }
+  
+  .faq-contact-cta {
+    margin-top: 3rem;
+  }
+  
+  .faq-contact-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
   }
   
   .related-guides-grid {
@@ -3818,6 +3864,15 @@ section {
     padding: 0 1rem 0.875rem;
   }
   
+  .faq-contact-cta {
+    margin-top: 2.5rem;
+  }
+  
+  .faq-contact-button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
   .guide-card {
     padding: 1rem;
   }
@@ -3841,6 +3896,20 @@ section {
   
   .knowledgebase-section .section-title {
     font-size: 1.75rem;
+  }
+  
+  .knowledgebase-faq-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+  }
+  
+  .knowledgebase-faq-section .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .knowledgebase-faq-section .faq-intro {
+    font-size: 0.9375rem;
+    margin-bottom: 1.5rem;
   }
   
   .knowledgebase-card-link {
@@ -4369,6 +4438,39 @@ section {
   padding: 0 0.5rem;
 }
 
+.knowledgebase-faq-section {
+  margin-top: 6rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.knowledgebase-faq-section .section-subtitle {
+  color: #d4af37;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.knowledgebase-faq-section .section-title {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.knowledgebase-faq-section .faq-intro {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.125rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.knowledgebase-faq-section .faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 @media (max-width: 1024px) {
   .knowledgebase-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -4497,6 +4599,20 @@ section {
     padding: 0.625rem 1rem;
     font-size: 0.875rem;
     min-width: auto;
+  }
+  
+  .knowledgebase-faq-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+  }
+  
+  .knowledgebase-faq-section .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .knowledgebase-faq-section .faq-intro {
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
   
   .pagination-number {

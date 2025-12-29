@@ -39,6 +39,30 @@ const ITEMS_PER_PAGE = 9
 
 const categories = ['All', ...Array.from(new Set(guides.map(g => g.category)))]
 
+const faqs = [
+  {
+    question: 'Are wall-hung toilets safe and strong?',
+    answer: 'Yes—when the correct carrier system is used and installed per the manufacturer\'s requirements. Many systems are engineered as structural frames intended to support the fixture load; the key is correct framing + correct installation.'
+  },
+  {
+    question: 'Do you have to open the wall to service the tank?',
+    answer: 'Routine service is commonly designed to occur through the flush actuator opening, depending on system. For board approvals, document the service plan clearly and include spec sheets.'
+  },
+  {
+    question: 'Are wall-hung toilets louder?',
+    answer: 'They can be quiet or loud depending on wall build, isolation details, and installation quality. In multi-family buildings, sound strategy should be treated as a specification item, not a hope.'
+  },
+  {
+    question: 'What do co-op boards usually require?',
+    answer: 'Typically: spec sheets, a plumbing plan excerpt, a wall/structural note, and a short serviceability statement. The cleaner the packet, the fewer questions.'
+  },
+  {
+    question: 'Which brands make the in-wall carrier systems?',
+    answer: 'Common concealed carrier platforms include manufacturers such as Geberit, TOTO, Duravit, and OLI. (Many other brands exist; these are simply widely recognized system families.)',
+    relatedBrands: ['Geberit USA', 'TOTO USA', 'Duravit', 'OLI']
+  }
+]
+
 type SortOrder = 'newest' | 'oldest'
 
 export default function KnowledgebaseSection() {
@@ -47,7 +71,9 @@ export default function KnowledgebaseSection() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [sortOrder, setSortOrder] = useState<SortOrder>('newest')
   const [showFilters, setShowFilters] = useState(false)
+  const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null)
   const guidesRef = useRef<(HTMLElement | null)[]>([])
+  const faqRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,6 +91,10 @@ export default function KnowledgebaseSection() {
 
     guidesRef.current.forEach((guide) => {
       if (guide) observer.observe(guide)
+    })
+
+    faqRefs.current.forEach((faq) => {
+      if (faq) observer.observe(faq)
     })
 
     return () => observer.disconnect()
@@ -99,6 +129,10 @@ export default function KnowledgebaseSection() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQIndex(openFAQIndex === index ? null : index)
   }
 
   return (
@@ -308,6 +342,73 @@ export default function KnowledgebaseSection() {
             )}
           </>
         )}
+
+        <div className="knowledgebase-faq-section">
+          <p className="section-subtitle">Expert Guidance</p>
+          <h2 className="section-title">Frequently Asked Questions</h2>
+          <p className="faq-intro">
+            Common questions about wall-hung toilets, carrier systems, and installation requirements. 
+            Get the answers you need for your next project.
+          </p>
+          
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                ref={(el) => { faqRefs.current[index] = el; }}
+                className={`faq-item fade-in ${openFAQIndex === index ? 'open' : ''}`}
+              >
+                <button
+                  className="faq-question"
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={openFAQIndex === index}
+                  aria-controls={`faq-answer-${index}`}
+                >
+                  <span>{faq.question}</span>
+                  <svg
+                    className="faq-icon"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div
+                  id={`faq-answer-${index}`}
+                  className="faq-answer"
+                  aria-hidden={openFAQIndex !== index ? 'true' : 'false'}
+                >
+                  <p>{faq.answer}</p>
+                  {faq.relatedBrands && (
+                    <div className="faq-brands">
+                      {faq.relatedBrands.map((brand, brandIndex) => (
+                        <span key={brandIndex} className="faq-brand-tag">{brand}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="faq-contact-cta">
+            <a 
+              href="mailto:customerexperience@ironandwaterco.com?subject=FAQ Question" 
+              className="faq-contact-button"
+              aria-label="Contact us if you have any questions"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              Contact Us If You Have Any Questions
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )

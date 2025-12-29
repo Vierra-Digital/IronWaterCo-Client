@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 
 const faqs = [
   {
@@ -27,23 +26,9 @@ const faqs = [
   }
 ]
 
-const relatedGuides = [
-  {
-    title: 'Wall-Hung Toilets + In-Wall Carriers: Co-op Approval, Specs, and Pitfalls',
-    href: '/guides/wall-hung-toilets-in-wall-carriers-coop-approval',
-    description: 'A practical guide to wall-hung toilets and in-wall carrier systems—what to specify, common mistakes, and the exact documents co-ops/condos typically require for approval.'
-  },
-  {
-    title: 'Wall-Hung Toilets in NYC Co-Op & Condo Buildings: Local Approval Notes & Planning Considerations',
-    href: '/guides/wall-hung-toilets-nyc-coop-condo',
-    description: 'NYC-specific guidance for wall-hung toilet installations. Learn what boards typically ask, approval language, and local building considerations.'
-  }
-]
-
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const faqRefs = useRef<(HTMLDivElement | null)[]>([])
-  const guideRefs = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,10 +46,6 @@ export default function FAQSection() {
 
     faqRefs.current.forEach((faq) => {
       if (faq) observer.observe(faq)
-    })
-
-    guideRefs.current.forEach((guide) => {
-      if (guide) observer.observe(guide)
     })
 
     return () => observer.disconnect()
@@ -128,24 +109,19 @@ export default function FAQSection() {
           ))}
         </div>
 
-        {relatedGuides.length > 0 && (
-          <div className="related-guides-section">
-            <h2 className="related-guides-title">Related Guides</h2>
-            <div className="related-guides-grid">
-              {relatedGuides.map((guide, index) => (
-                <Link
-                  key={index}
-                  href={guide.href}
-                  ref={(el) => { guideRefs.current[index] = el; }}
-                  className="guide-card fade-in"
-                >
-                  <h3 className="related-guide-title">{guide.title}</h3>
-                  <p className="guide-description">{guide.description}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+        <div className="faq-contact-cta">
+          <a 
+            href="mailto:customerexperience@ironandwaterco.com?subject=FAQ Question" 
+            className="faq-contact-button"
+            aria-label="Contact us if you have any questions"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Contact Us If You Have Any Questions
+          </a>
+        </div>
       </div>
     </section>
   )
