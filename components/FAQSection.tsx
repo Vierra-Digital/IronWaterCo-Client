@@ -4,25 +4,99 @@ import { useEffect, useRef, useState } from 'react'
 
 const faqs = [
   {
-    question: 'Are wall-hung toilets safe and strong?',
-    answer: 'Yes—when the correct carrier system is used and installed per the manufacturer\'s requirements. Many systems are engineered as structural frames intended to support the fixture load; the key is correct framing + correct installation.'
+    question: 'Who is Iron & Water Co.?',
+    answer: 'We are Iron & Water Co.—Long Island\'s pre-eminent showroom for architectural door and decorative hardware, decorative plumbing, and lighting. We are located on the Miracle Mile in Manhasset, making us easily accessible from anywhere in the Tri-State area.'
   },
   {
-    question: 'Do you have to open the wall to service the tank?',
-    answer: 'Routine service is commonly designed to occur through the flush actuator opening, depending on system. For board approvals, document the service plan clearly and include spec sheets.'
+    question: 'What makes Iron & Water Co. different from other showrooms?',
+    answer: 'We\'re not a speed shop, and we\'re not appointment-only. We\'re built for people who value comfort and authority in the same room. In practice, that means:',
+    bullets: [
+      'We know our product—and how it performs in real-world conditions.',
+      'We are patient, not pushy. If you\'re not ready to decide, that\'s respected.',
+      'Our selection is highly curated. We don\'t try to be everything to everyone.'
+    ]
   },
   {
-    question: 'Are wall-hung toilets louder?',
-    answer: 'They can be quiet or loud depending on wall build, isolation details, and installation quality. In multi-family buildings, sound strategy should be treated as a specification item, not a hope.'
+    question: 'Do I need an appointment to receive assistance?',
+    answer: 'No. We are structured so clients can walk in and be taken care of without needing to schedule in advance. For complex or multi-phase projects, we are always happy to plan dedicated time—but it\'s never a requirement to be helped.'
   },
   {
-    question: 'What do co-op boards usually require?',
-    answer: 'Typically: spec sheets, a plumbing plan excerpt, a wall/structural note, and a short serviceability statement. The cleaner the packet, the fewer questions.'
+    question: 'Are you a trade-only showroom?',
+    answer: 'We work primarily with members of the trade—designers, architects, and contractors—but we intentionally remain accessible to homeowners. We are open seven days a week to provide flexibility for homeowners while continuing to support the trade with a showroom that respects real project timelines.'
   },
   {
-    question: 'Which brands make the in-wall carrier systems?',
-    answer: 'Common concealed carrier platforms include manufacturers such as Geberit, TOTO, Duravit, and OLI. (Many other brands exist; these are simply widely recognized system families.)',
-    relatedBrands: ['Geberit USA', 'TOTO USA', 'Duravit', 'OLI']
+    question: 'What\'s your philosophy when helping homeowners make selections?',
+    answer: 'We bring product authority and a steady hand—but we never override your vision. Our role is to bring clarity to the process so decisions feel confident, informed, and grounded in reality. We guide the process by:',
+    bullets: [
+      'Asking the right questions (consistently, not aggressively).',
+      'Educating without overwhelming.',
+      'And helping you land decisions you\'ll still feel proud of a year from now.'
+    ]
+  },
+  {
+    question: 'What does "highly curated" mean?',
+    answer: 'Curated means we are intentional about what we present—and just as intentional about what we don\'t. Our selections are based on:',
+    bullets: [
+      'Long-term quality and performance.',
+      'Aesthetic integrity across finishes and collections.',
+      'And value at each price point.'
+    ],
+    answerAfter: 'We also feature products that are not commonly seen in our market, allowing us to present design-forward options without chasing trends or volume.'
+  },
+  {
+    question: 'Do you carry commodity brands?',
+    answer: 'No. We are not a commodity showroom. If the priority is the lowest possible price or the fastest possible transaction, we may not be the right fit—and we believe it\'s important to be transparent about that from the start.'
+  },
+  {
+    question: 'How do you work with designers, architects, and contractors?',
+    answer: 'We are built to support specification and execution—not just selection. We assist the trade by:',
+    bullets: [
+      'Confirming compatibility across trims, valves, finishes, and rough-in requirements.',
+      'Identifying conflicts early.',
+      'And ensuring specifications are clean, accurate, and buildable.'
+    ],
+    answerAfter: 'This approach reduces rework, delays, and unnecessary stress downstream.'
+  },
+  {
+    question: 'How much experience does Iron & Water Co. have?',
+    answer: 'We bring over 70 years of combined experience assisting homeowners and the trade—guiding selections, protecting specifications, and solving challenges before they become problems.'
+  },
+  {
+    question: 'What happens if something goes wrong after delivery?',
+    answer: 'We do everything we can to prevent issues before they occur. But construction—like life—doesn\'t always move in straight lines. When challenges arise:',
+    bullets: [
+      'We do not place blame.',
+      'We focus on identifying the issue.',
+      'And we work toward the most fair and practical solution for all parties involved.'
+    ],
+    answerAfter: 'Solving the problem is the priority.'
+  },
+  {
+    question: 'What does "Unreasonable Hospitality" mean at Iron & Water Co.?',
+    answer: 'It means we treat people like guests, not transactions. Hospitality, to us, includes:',
+    bullets: [
+      'Being attentive without hovering.',
+      'Creating a calm, supportive environment.',
+      'Following through consistently.',
+      'And paying attention to details that affect how a space feels.'
+    ],
+    answerAfter: 'Yes—the showroom itself smells good, too. The details matter.'
+  },
+  {
+    question: 'How should the showroom experience feel?',
+    answer: 'Being in Iron & Water Co. feels comfortable, confident, and considered. Our goal is for clients to feel at ease, informed, and respected—without pressure, posturing, or intimidation.'
+  },
+  {
+    question: 'Where are you located?',
+    answer: 'We are located on the Miracle Mile in Manhasset, Long Island, and are easily accessible from Nassau County, Queens, Suffolk County, New York City, Westchester, and New Jersey.'
+  },
+  {
+    question: 'What are your hours?',
+    answer: 'We are open seven days a week to support both trade professionals and homeowners with real-world schedules.'
+  },
+  {
+    question: 'What should I bring when I visit?',
+    answer: 'If available, bring inspiration images, plans, elevations, finish samples, or notes about what you\'re trying to accomplish. If you don\'t have any of that yet, that\'s perfectly fine. We\'ll begin with questions and build from there.'
   }
 ]
 
@@ -61,8 +135,8 @@ export default function FAQSection() {
         <p className="section-subtitle">Expert Guidance</p>
         <h1 id="faq-heading" className="section-title">Frequently Asked Questions</h1>
         <p className="faq-intro">
-          Common questions about wall-hung toilets, carrier systems, and installation requirements. 
-          Get the answers you need for your next project.
+          Common questions about our showroom, services, and approach. 
+          Get the answers you need to understand how we work.
         </p>
         
         <div className="faq-list">
@@ -97,6 +171,14 @@ export default function FAQSection() {
                 aria-hidden={openIndex !== index ? 'true' : 'false'}
               >
                 <p>{faq.answer}</p>
+                {faq.bullets && (
+                  <ul className="faq-bullets">
+                    {faq.bullets.map((bullet, bulletIndex) => (
+                      <li key={bulletIndex}>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+                {faq.answerAfter && <p>{faq.answerAfter}</p>}
                 {faq.relatedBrands && (
                   <div className="faq-brands">
                     {faq.relatedBrands.map((brand, brandIndex) => (
