@@ -2,7 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const faqs = [
+interface FAQ {
+  question: string
+  answer: string
+  bullets?: string[]
+  answerAfter?: string
+  relatedBrands?: string[]
+}
+
+const faqs: FAQ[] = [
   {
     question: 'Who is Iron & Water Co.?',
     answer: 'We are Iron & Water Co.—Long Island\'s pre-eminent showroom for architectural door and decorative hardware, decorative plumbing, and lighting. We are located on the Miracle Mile in Manhasset, making us easily accessible from anywhere in the Tri-State area.'
