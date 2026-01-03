@@ -508,7 +508,7 @@ export async function GET(request: NextRequest) {
     
     const hasMore = needsFullSearch
       ? (sortedProducts.length > page * limit)
-      : (totalCount > page * limit)
+      : ((totalCount || 0) > page * limit)
 
     return NextResponse.json({
       success: true,
