@@ -45,6 +45,7 @@ export default function HeroSection() {
           </a>
           <div className="navbar-links" role="list">
             <a href="#services" className="nav-link" role="listitem">Services</a>
+            <a href="/store" className="nav-link" role="listitem">Store</a>
             <a href="/vendors" className="nav-link" role="listitem">Vendors</a>
             <a href="/knowledgebase" className="nav-link" role="listitem">Knowledgebase</a>
             <a href="/faq" className="nav-link" role="listitem">FAQ</a>

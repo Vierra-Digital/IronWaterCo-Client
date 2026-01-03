@@ -17,30 +17,45 @@ interface NotificationEmailData {
 }
 
 // Validate environment variables
-if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-  console.warn("⚠️  EMAIL_USER and EMAIL_PASS must be set in .env.local for email functionality");
+// Support both old (EMAIL_USER/EMAIL_PASS) and new (SMTP_USER/SMTP_PASSWORD) configurations
+const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+const smtpPassword = process.env.SMTP_PASSWORD || process.env.EMAIL_PASS;
+const smtpHost = process.env.SMTP_HOST || "smtp.gmail.com";
+const smtpPort = parseInt(process.env.SMTP_PORT || "587");
+const fromEmail = process.env.FROM_EMAIL || smtpUser;
+const fromName = process.env.FROM_NAME || "Iron & Water Co.";
+
+if (!smtpUser || !smtpPassword) {
+  console.warn("⚠️  SMTP_USER and SMTP_PASSWORD (or EMAIL_USER and EMAIL_PASS) must be set in .env.local for email functionality");
 }
 
 // Create transporter with Gmail/Google Workspace configuration
 // Works for both @gmail.com and custom domains (Google Workspace)
 const transporter = nodemailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // Use SSL
+  host: smtpHost,
+  port: smtpPort,
+  secure: smtpPort === 465, // Use SSL for port 465, TLS for port 587
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: smtpUser,
+    pass: smtpPassword,
   },
   // Add debug option for troubleshooting
   debug: process.env.NODE_ENV === "development",
   logger: process.env.NODE_ENV === "development",
 });
 
-const notificationRecipients = process.env.NOTIFICATION_EMAILS?.split(",") || [
-  "richard@ironandwaterco.com",
-  "raynny@ironandwaterco.com",
-];
+// Parse notification emails from environment variable
+// Handles comma-separated list with optional spaces
+const notificationRecipients = process.env.NOTIFICATION_EMAILS
+  ? process.env.NOTIFICATION_EMAILS.split(",")
+      .map(email => email.trim())
+      .filter(email => email.length > 0)
+  : [];
+
+// Log notification recipients (only in development)
+if (process.env.NODE_ENV === "development") {
+  console.log(`Notification emails configured: ${notificationRecipients.length > 0 ? notificationRecipients.join(", ") : "None (NOTIFICATION_EMAILS not set)"}`);
+}
 
 // Logo URL - use environment variable or default to placeholder
 const logoUrl = process.env.NEXT_PUBLIC_SITE_URL 
@@ -49,7 +64,7 @@ const logoUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: `"${fromName}" <${fromEmail}>`,
     to: data.email,
     subject: "Welcome to Iron & Water Co. Founders Circle",
     html: `
@@ -299,20 +314,20 @@ export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
   };
 
   try {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      throw new Error("Email credentials not configured. Please set EMAIL_USER and EMAIL_PASS in .env.local");
+    if (!smtpUser || !smtpPassword) {
+      throw new Error("Email credentials not configured. Please set SMTP_USER and SMTP_PASSWORD (or EMAIL_USER and EMAIL_PASS) in .env.local");
     }
     const info = await transporter.sendMail(mailOptions);
     console.log("Welcome email sent successfully:", info.response);
   } catch (error: any) {
     console.error("Error sending welcome email:", error);
     if (error.code === "EAUTH") {
-      const emailDomain = process.env.EMAIL_USER?.split("@")[1] || "";
+      const emailDomain = smtpUser?.split("@")[1] || "";
       const isCustomDomain = emailDomain !== "gmail.com";
       
       let errorMessage = "Gmail/Google Workspace authentication failed. Please check:\n";
-      errorMessage += `1. EMAIL_USER is correct: ${process.env.EMAIL_USER}\n`;
-      errorMessage += "2. EMAIL_PASS is an app-specific password (NOT your regular password)\n";
+      errorMessage += `1. SMTP_USER is correct: ${smtpUser}\n`;
+      errorMessage += "2. SMTP_PASSWORD is an app-specific password (NOT your regular password)\n";
       errorMessage += "3. 2-Step Verification is enabled on your Google account\n";
       
       if (isCustomDomain) {
@@ -330,8 +345,13 @@ export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
 }
 
 export async function sendNotificationEmail(data: NotificationEmailData): Promise<void> {
+  if (notificationRecipients.length === 0) {
+    console.warn("⚠️  No notification recipients configured. Set NOTIFICATION_EMAILS in .env.local");
+    return;
+  }
+
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: `"${fromName}" <${fromEmail}>`,
     to: notificationRecipients.join(","),
     subject: `New Founders Circle Sign Up: ${data.name}`,
     html: `
@@ -510,20 +530,20 @@ export async function sendNotificationEmail(data: NotificationEmailData): Promis
   };
 
   try {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      throw new Error("Email credentials not configured. Please set EMAIL_USER and EMAIL_PASS in .env.local");
+    if (!smtpUser || !smtpPassword) {
+      throw new Error("Email credentials not configured. Please set SMTP_USER and SMTP_PASSWORD (or EMAIL_USER and EMAIL_PASS) in .env.local");
     }
     const info = await transporter.sendMail(mailOptions);
     console.log("Notification email sent successfully:", info.response);
   } catch (error: any) {
     console.error("Error sending notification email:", error);
     if (error.code === "EAUTH") {
-      const emailDomain = process.env.EMAIL_USER?.split("@")[1] || "";
+      const emailDomain = smtpUser?.split("@")[1] || "";
       const isCustomDomain = emailDomain !== "gmail.com";
       
       let errorMessage = "Gmail/Google Workspace authentication failed. Please check:\n";
-      errorMessage += `1. EMAIL_USER is correct: ${process.env.EMAIL_USER}\n`;
-      errorMessage += "2. EMAIL_PASS is an app-specific password (NOT your regular password)\n";
+      errorMessage += `1. SMTP_USER is correct: ${smtpUser}\n`;
+      errorMessage += "2. SMTP_PASSWORD is an app-specific password (NOT your regular password)\n";
       errorMessage += "3. 2-Step Verification is enabled on your Google account\n";
       
       if (isCustomDomain) {

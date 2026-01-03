@@ -1,4 +1,6 @@
 {
-  "/faq/page": "app/faq/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/store/page": "app/store/page.js",
+  "/api/cin7/products/route": "app/api/cin7/products/route.js",
+  "/api/cin7/categories/route": "app/api/cin7/categories/route.js"
 }

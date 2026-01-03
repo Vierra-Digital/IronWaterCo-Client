@@ -11,12 +11,22 @@ EMAIL_PASS=your_app_specific_password
 
 # Email addresses to receive signup notifications
 # Separate multiple emails with commas
-NOTIFICATION_EMAILS=richard@ironandwaterco.com,raynny@ironandwaterco.com
+NOTIFICATION_EMAILS=email1@example.com,email2@example.com
 
 # Site URL for logo in emails (optional)
 # If not set, defaults to https://ironandwaterco.com/logo.png
 # Update this with your actual domain once deployed
 NEXT_PUBLIC_SITE_URL=https://ironandwaterco.com
+
+# Cin7 API Configuration
+# Get these credentials from your Cin7 account:
+# 1. Log in to Cin7
+# 2. Go to Settings > Integrations & API > API v1
+# 3. Create a new API connection
+# 4. Copy the AccountID (API Username) and Key (API Key)
+# Example credentials (replace with your actual values):
+CIN7_API_USERNAME=88ddca51-e896-451d-aaff-43deb7a49c16
+CIN7_API_KEY=906d36e5-890b-51df-d0f3-6b93477dbe3d
 ```
 
 ## Setup Instructions
@@ -32,8 +42,19 @@ NEXT_PUBLIC_SITE_URL=https://ironandwaterco.com
    - Note: You must have 2-Step Verification enabled on your Google account
 
 2. **Notification Emails:**
-   - Update `NOTIFICATION_EMAILS` with actual email addresses for Richard and Raynny
+   - Update `NOTIFICATION_EMAILS` with actual email addresses that should receive form submission notifications
    - Separate multiple emails with commas
+
+3. **Cin7 API Setup:**
+   - Log in to your Cin7 account
+   - Navigate to **Settings** > **Integrations & API** > **API v1**
+   - Click **Add New API Connection**
+   - Provide a descriptive name (e.g., "Iron Water Co Store")
+   - Click **Save** to generate the API Key
+   - Copy the **API Username** and **API Key**
+   - Add them to your `.env.local` file as `CIN7_API_USERNAME` and `CIN7_API_KEY`
+   - Set permissions for the connection (at minimum, Read access for Products)
+   - For more information, see: https://dearinventory.docs.apiary.io/
 
 ## Important Notes
 

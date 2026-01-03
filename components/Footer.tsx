@@ -30,6 +30,7 @@ export default function Footer() {
           <nav className="footer-column" aria-label="Navigation links">
             <h3>Navigation</h3>
             <p><a href="/#services" className="footer-link">Services</a></p>
+            <p><a href="/store" className="footer-link">Store</a></p>
             <p><a href="/vendors" className="footer-link">Vendors</a></p>
             <p><a href="/knowledgebase" className="footer-link">Knowledgebase</a></p>
             <p><a href="/faq" className="footer-link">FAQ</a></p>

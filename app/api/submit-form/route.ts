@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       email,
     })
 
-    // Send notification email to Richard and Raynny
+    // Send notification email to configured recipients
     await sendNotificationEmail({
       name,
       company: company || undefined,

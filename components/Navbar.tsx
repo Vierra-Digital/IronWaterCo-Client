@@ -6,7 +6,7 @@ import Image from 'next/image'
 import FormModal from './FormModal'
 
 interface NavbarProps {
-  activePage?: 'home' | 'vendors' | 'faq' | 'knowledgebase'
+  activePage?: 'home' | 'store' | 'vendors' | 'faq' | 'knowledgebase'
 }
 
 export default function Navbar({ activePage = 'home' }: NavbarProps) {
@@ -42,6 +42,7 @@ export default function Navbar({ activePage = 'home' }: NavbarProps) {
           </Link>
           <div className="navbar-links" role="list">
             <Link href="/#services" className="nav-link" role="listitem">Services</Link>
+            <Link href="/store" className={`nav-link ${activePage === 'store' ? 'nav-link-active' : ''}`} role="listitem">Store</Link>
             <Link href="/vendors" className={`nav-link ${activePage === 'vendors' ? 'nav-link-active' : ''}`} role="listitem">Vendors</Link>
             <Link href="/knowledgebase" className={`nav-link ${activePage === 'knowledgebase' ? 'nav-link-active' : ''}`} role="listitem">Knowledgebase</Link>
             <Link href="/faq" className={`nav-link ${activePage === 'faq' ? 'nav-link-active' : ''}`} role="listitem">FAQ</Link>

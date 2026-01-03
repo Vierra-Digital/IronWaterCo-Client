@@ -1,6 +1,12 @@
 import HeroSection from '../components/HeroSection'
+import type { Metadata } from 'next'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironandwaterco.com'
+
+export const metadata: Metadata = {
+  title: 'Plumbing and Construction Products',
+  description: 'Iron & Water Co. curates extraordinary architectural hardware and plumbing for designers, architects, builders & homeowners on Long Island\'s Miracle Mile.',
+}
 
 export default function Home() {
   const structuredData = {

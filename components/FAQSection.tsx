@@ -110,7 +110,30 @@ const faqs: FAQ[] = [
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
   const faqRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sectionRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Parallax scrolling effect (disabled on mobile for performance)
+    if (window.innerWidth > 768) {
+      const handleScroll = () => {
+        if (headerRef.current && listRef.current) {
+          const scrolled = window.pageYOffset
+          const rate = scrolled * 0.2
+          headerRef.current.style.transform = `translateY(${rate}px)`
+          listRef.current.style.transform = `translateY(${-rate * 0.1}px)`
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -138,16 +161,18 @@ export default function FAQSection() {
   }
 
   return (
-    <section id="faq" className="faq-section" aria-labelledby="faq-heading">
+    <section id="faq" className={`faq-section ${isVisible ? 'faq-section-visible' : ''}`} ref={sectionRef} aria-labelledby="faq-heading">
       <div className="container">
-        <p className="section-subtitle">Expert Guidance</p>
-        <h1 id="faq-heading" className="section-title">Frequently Asked Questions</h1>
-        <p className="faq-intro">
-          Common questions about our showroom, services, and approach. 
-          Get the answers you need to understand how we work.
-        </p>
+        <div ref={headerRef}>
+          <p className="section-subtitle">Expert Guidance</p>
+          <h1 id="faq-heading" className="section-title">Frequently Asked Questions</h1>
+          <p className="faq-intro">
+            Common questions about our showroom, services, and approach. 
+            Get the answers you need to understand how we work.
+          </p>
+        </div>
         
-        <div className="faq-list">
+        <div className="faq-list" ref={listRef}>
           {faqs.map((faq, index) => (
             <div
               key={index}

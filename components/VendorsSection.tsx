@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const vendors = [
   'Alice Ceramica',
@@ -65,7 +65,30 @@ const vendors = [
 ].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
 
 export default function VendorsSection() {
+  const [isVisible, setIsVisible] = useState(false)
   const vendorsRef = useRef<(HTMLElement | null)[]>([])
+  const sectionRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Parallax scrolling effect (disabled on mobile for performance)
+    if (window.innerWidth > 768) {
+      const handleScroll = () => {
+        if (headerRef.current && gridRef.current) {
+          const scrolled = window.pageYOffset
+          const rate = scrolled * 0.2
+          headerRef.current.style.transform = `translateY(${rate}px)`
+          gridRef.current.style.transform = `translateY(${-rate * 0.1}px)`
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -89,15 +112,17 @@ export default function VendorsSection() {
   }, [])
 
   return (
-    <section id="vendors" className="vendors-section" aria-labelledby="vendors-heading">
+    <section id="vendors" className={`vendors-section ${isVisible ? 'vendors-section-visible' : ''}`} ref={sectionRef} aria-labelledby="vendors-heading">
       <div className="container">
-        <p className="section-subtitle">Curated Excellence</p>
-        <h1 id="vendors-heading" className="section-title">Our Vendors</h1>
-        <p className="vendors-intro">
-          We partner with the world's finest manufacturers to bring you exceptional architectural hardware and plumbing fixtures. 
-          Each vendor in our collection has been carefully selected for their commitment to quality, craftsmanship, and design excellence.
-        </p>
-        <div className="vendors-grid" role="list">
+        <div ref={headerRef}>
+          <p className="section-subtitle">Curated Excellence</p>
+          <h1 id="vendors-heading" className="section-title">Our Vendors</h1>
+          <p className="vendors-intro">
+            We partner with the world's finest manufacturers to bring you exceptional architectural hardware and plumbing fixtures. 
+            Each vendor in our collection has been carefully selected for their commitment to quality, craftsmanship, and design excellence.
+          </p>
+        </div>
+        <div className="vendors-grid" ref={gridRef} role="list">
           {vendors.map((vendor, index) => (
             <div
               key={index}

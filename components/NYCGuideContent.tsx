@@ -6,6 +6,28 @@ import Link from 'next/link'
 export default function NYCGuideContent() {
   const contentRef = useRef<HTMLDivElement>(null)
   const [currentUrl, setCurrentUrl] = useState('')
+  const [isVisible, setIsVisible] = useState(false)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const bodyRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Parallax scrolling effect (disabled on mobile for performance)
+    if (window.innerWidth > 768) {
+      const handleScroll = () => {
+        if (headerRef.current && bodyRef.current) {
+          const scrolled = window.pageYOffset
+          const rate = scrolled * 0.2
+          headerRef.current.style.transform = `translateY(${rate}px)`
+          bodyRef.current.style.transform = `translateY(${-rate * 0.1}px)`
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -34,8 +56,8 @@ export default function NYCGuideContent() {
   }, [])
 
   return (
-    <article className="guide-page" ref={contentRef}>
-      <div className="guide-header">
+    <article className={`guide-page ${isVisible ? 'guide-page-visible' : ''}`} ref={contentRef}>
+      <div className="guide-header" ref={headerRef}>
         <div className="container">
           <h1 className="guide-title fade-in">
             Wall-Hung Toilets in NYC Co-Op & Condo Buildings: Local Approval Notes & Planning Considerations
@@ -51,7 +73,7 @@ export default function NYCGuideContent() {
         </div>
       </div>
 
-      <div className="guide-body">
+      <div className="guide-body" ref={bodyRef}>
         <div className="container">
           <div className="guide-content">
             <section className="guide-section fade-in">

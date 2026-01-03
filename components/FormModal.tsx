@@ -109,6 +109,12 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
         
         {isSubmitted ? (
           <div className="success-message">
+            <div className="success-checkmark">
+              <svg className="checkmark-svg" viewBox="0 0 52 52">
+                <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path className="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+            </div>
             <h2 className="success-title">You're on the list.</h2>
             <p className="success-text">We'll reach out with early previews and VIP invites.</p>
             <button className="close-button" onClick={handleClose}>

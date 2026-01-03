@@ -72,8 +72,31 @@ export default function KnowledgebaseSection() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('newest')
   const [showFilters, setShowFilters] = useState(false)
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
   const guidesRef = useRef<(HTMLElement | null)[]>([])
   const faqRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sectionRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Parallax scrolling effect (disabled on mobile for performance)
+    if (window.innerWidth > 768) {
+      const handleScroll = () => {
+        if (headerRef.current && cardsRef.current) {
+          const scrolled = window.pageYOffset
+          const rate = scrolled * 0.2
+          headerRef.current.style.transform = `translateY(${rate}px)`
+          cardsRef.current.style.transform = `translateY(${-rate * 0.1}px)`
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -136,13 +159,15 @@ export default function KnowledgebaseSection() {
   }
 
   return (
-    <section id="knowledgebase" className="knowledgebase-section" aria-labelledby="knowledgebase-heading">
+    <section id="knowledgebase" className={`knowledgebase-section ${isVisible ? 'knowledgebase-section-visible' : ''}`} ref={sectionRef} aria-labelledby="knowledgebase-heading">
       <div className="container">
-        <p className="section-subtitle">Expert Resources</p>
-        <h1 id="knowledgebase-heading" className="section-title">Knowledgebase</h1>
-        <p className="knowledgebase-intro">
-          Comprehensive guides, specifications, and best practices for architectural hardware, plumbing systems, and installation requirements.
-        </p>
+        <div ref={headerRef}>
+          <p className="section-subtitle">Expert Resources</p>
+          <h1 id="knowledgebase-heading" className="section-title">Knowledgebase</h1>
+          <p className="knowledgebase-intro">
+            Comprehensive guides, specifications, and best practices for architectural hardware, plumbing systems, and installation requirements.
+          </p>
+        </div>
 
         <div className="knowledgebase-search-filter">
           <div className="knowledgebase-search-wrapper">
@@ -220,6 +245,7 @@ export default function KnowledgebaseSection() {
           )}
         </div>
 
+        <div ref={cardsRef}>
         {filteredGuides.length === 0 ? (
           <div className="knowledgebase-empty">
             <div className="empty-animation">
@@ -342,6 +368,7 @@ export default function KnowledgebaseSection() {
             )}
           </>
         )}
+        </div>
 
         <div className="knowledgebase-faq-section">
           <p className="section-subtitle">Expert Guidance</p>
