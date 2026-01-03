@@ -327,10 +327,10 @@ export async function GET(request: NextRequest) {
       const cacheKey = getProductsCacheKey({ 
         page: cin7Page, 
         limit: cin7Limit, 
-        category, 
+        category: category || undefined, 
         search: undefined,
         sortBy, 
-        sortOrder 
+        sortOrder: sortOrder || undefined
       })
       let data = cin7Cache.get<any>(cacheKey)
       
