@@ -1,0 +1,94 @@
+# Iron & Water Co. - LLMs.txt
+# This file provides information about our website for AI language models and crawlers
+
+# Site Information
+Site: https://ironandwaterco.com
+Name: Iron & Water Co.
+Description: Curating extraordinary architectural hardware and plumbing for designers, architects, builders & homeowners on Long Island's Miracle Mile. Elevating the design trade through exceptional detail, service, and partnership.
+
+# Business Information
+Business Type: Local Business / Showroom
+Industry: Architectural Hardware & Plumbing
+Location: 1506 Northern Blvd, Manhasset, NY 11030, United States
+Phone: 329-233-6638
+Email: customerexperience@ironandwaterco.com
+Hours: Monday-Saturday, 9:00 AM - 6:00 PM EST
+Price Range: $$$
+
+# Target Audience
+- Designers
+- Architects
+- Builders
+- Homeowners
+- Trade Professionals
+
+# Main Pages
+Home: https://ironandwaterco.com/
+Store: https://ironandwaterco.com/store
+Vendors: https://ironandwaterco.com/vendors
+Knowledgebase: https://ironandwaterco.com/knowledgebase
+FAQ: https://ironandwaterco.com/faq
+
+# Guide Articles
+Wall-Hung Toilets NYC Coop/Condo Guide: https://ironandwaterco.com/guides/wall-hung-toilets-nyc-coop-condo
+Wall-Hung Toilets In-Wall Carriers Coop Approval: https://ironandwaterco.com/guides/wall-hung-toilets-in-wall-carriers-coop-approval
+
+# Product Catalog
+Product Catalog: https://ironandwaterco.com/store
+Product Count: ~26,000+ products
+Categories: Architectural hardware, plumbing fixtures, bathroom accessories, kitchen fixtures, and more
+
+# Sitemap
+Sitemap: https://ironandwaterco.com/sitemap.xml
+
+# Social Media
+Instagram: https://www.instagram.com/ironandwaterco/
+LinkedIn: https://www.linkedin.com/company/iron-water-co/
+
+# Services Offered
+- Architectural hardware curation
+- Plumbing fixture selection
+- Trade program access
+- Specification support
+- Concierge ordering
+- Showroom consultation
+- Design partnership
+
+# Key Features
+- Comprehensive product catalog with 26,000+ items
+- Advanced search and filtering capabilities
+- Category-based browsing
+- Vendor information and resources
+- Knowledge base with expert resources
+- FAQ section
+- Educational guides for trade professionals
+- Early access Founders Circle program
+
+# Content Types
+- Product listings with detailed specifications
+- Vendor profiles and information
+- Educational articles and guides
+- FAQ content
+- Knowledge base resources
+- Contact and consultation information
+
+# Geographic Focus
+Primary Market: Long Island, New York (Miracle Mile, Manhasset)
+Secondary Market: New York Metropolitan Area
+Service Area: United States
+
+# Contact & Support
+Customer Service Email: customerexperience@ironandwaterco.com
+Business Email: business@alexshick.com
+Phone Support: 329-233-6638
+Showroom Address: 1506 Northern Blvd, Manhasset, NY 11030
+
+# Technical Information
+Framework: Next.js 14 (App Router)
+Language: TypeScript
+Content: Server-side rendered with client-side interactivity
+API: RESTful API endpoints for product data and form submissions
+
+# Last Updated
+Last Updated: 2024
+
