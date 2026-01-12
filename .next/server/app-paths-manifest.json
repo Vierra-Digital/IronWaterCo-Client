@@ -1,5 +1,4 @@
 {
-  "/api/cin7/products/route": "app/api/cin7/products/route.js",
-  "/api/cin7/categories/route": "app/api/cin7/categories/route.js",
-  "/store/page": "app/store/page.js"
+  "/vendors/page": "app/vendors/page.js",
+  "/page": "app/page.js"
 }
