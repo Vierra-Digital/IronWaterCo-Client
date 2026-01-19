@@ -57,6 +57,12 @@ export default function KnowledgebasePage() {
           name: 'Wall-Hung Toilets in NYC Co-Op & Condo Buildings: Local Approval Notes & Planning Considerations',
           url: `${siteUrl}/guides/wall-hung-toilets-nyc-coop-condo`,
         },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Kosher Material Reference: Blanco Silgranit Kitchen Sinks',
+          url: `${siteUrl}/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks`,
+        },
       ],
     },
   }

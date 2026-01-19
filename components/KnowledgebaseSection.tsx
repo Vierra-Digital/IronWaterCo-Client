@@ -32,6 +32,15 @@ const guides: Guide[] = [
     date: '2025-12-27',
     readTime: '6 min read'
   },
+  {
+    id: '3',
+    title: 'Kosher Material Reference: Blanco Silgranit Kitchen Sinks',
+    slug: '/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks',
+    description: 'A supporting reference for clients who maintain kosher kitchens. Review material considerations related to Blanco Silgranit kitchen sinks with documentation from the Zomet Institute.',
+    category: 'Material Reference',
+    date: '2026-01-18',
+    readTime: '5 min read'
+  },
   // Add more guides here as they're created
 ]
 
@@ -76,26 +85,9 @@ export default function KnowledgebaseSection() {
   const guidesRef = useRef<(HTMLElement | null)[]>([])
   const faqRefs = useRef<(HTMLDivElement | null)[]>([])
   const sectionRef = useRef<HTMLElement>(null)
-  const headerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsVisible(true)
-    
-    // Parallax scrolling effect (disabled on mobile for performance)
-    if (window.innerWidth > 768) {
-      const handleScroll = () => {
-        if (headerRef.current && cardsRef.current) {
-          const scrolled = window.pageYOffset
-          const rate = scrolled * 0.2
-          headerRef.current.style.transform = `translateY(${rate}px)`
-          cardsRef.current.style.transform = `translateY(${-rate * 0.1}px)`
-        }
-      }
-
-      window.addEventListener('scroll', handleScroll)
-      return () => window.removeEventListener('scroll', handleScroll)
-    }
   }, [])
 
   useEffect(() => {
@@ -161,7 +153,7 @@ export default function KnowledgebaseSection() {
   return (
     <section id="knowledgebase" className={`knowledgebase-section ${isVisible ? 'knowledgebase-section-visible' : ''}`} ref={sectionRef} aria-labelledby="knowledgebase-heading">
       <div className="container">
-        <div ref={headerRef}>
+        <div>
           <p className="section-subtitle">Expert Resources</p>
           <h1 id="knowledgebase-heading" className="section-title">Knowledgebase</h1>
           <p className="knowledgebase-intro">
@@ -245,7 +237,7 @@ export default function KnowledgebaseSection() {
           )}
         </div>
 
-        <div ref={cardsRef}>
+        <div>
         {filteredGuides.length === 0 ? (
           <div className="knowledgebase-empty">
             <div className="empty-animation">

@@ -43,6 +43,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks`,
+      lastModified: new Date('2026-01-18'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}#services`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

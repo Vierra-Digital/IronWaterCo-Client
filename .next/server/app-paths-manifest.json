@@ -1,4 +1,6 @@
 {
-  "/vendors/page": "app/vendors/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/knowledgebase/page": "app/knowledgebase/page.js",
+  "/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks/page": "app/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks/page.js",
+  "/guides/wall-hung-toilets-nyc-coop-condo/page": "app/guides/wall-hung-toilets-nyc-coop-condo/page.js"
 }
