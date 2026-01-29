@@ -11,6 +11,7 @@ const vendors = [
   'AquaBrass',
   'AquaBrass Xpress',
   'Armadi Art',
+  'Artos',
   'Ashley Norton',
   'Axent',
   'Baden Haus',
