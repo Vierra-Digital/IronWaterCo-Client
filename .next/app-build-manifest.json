@@ -11,21 +11,6 @@
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
-    ],
-    "/knowledgebase/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/knowledgebase/page.js"
-    ],
-    "/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks/page.js"
-    ],
-    "/guides/wall-hung-toilets-nyc-coop-condo/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/guides/wall-hung-toilets-nyc-coop-condo/page.js"
     ]
   }
 }

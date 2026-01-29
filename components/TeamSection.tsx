@@ -44,7 +44,7 @@ export default function TeamSection() {
               <div className="team-photo-wrapper">
                 <div className="team-photo team-photo-image">
                   <Image 
-                    src="/Richard-Segal.jpeg" 
+                    src="/Richard-Segal.png" 
                     alt="Richard Segal - General Manager at Iron & Water Co. Architectural Hardware Showroom" 
                     width={100} 
                     height={100} 
