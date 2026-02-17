@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import FormModal from './FormModal'
+import Navbar from './Navbar'
 import ServicesSection from './ServicesSection'
 import ReviewsSection from './ReviewsSection'
 import TeamSection from './TeamSection'
@@ -24,36 +24,7 @@ export default function HeroSection() {
 
   return (
     <>
-      {/* Navbar */}
-      <nav className={`navbar ${isLoaded ? 'navbar-loaded' : ''}`} aria-label="Main navigation">
-        <div className="navbar-content">
-          <a href="#" className="navbar-brand" aria-label="Iron & Water Co. Home">
-            <div className="navbar-logo">
-              <Image
-                src="/logo.png"
-                alt="Iron & Water Co. - Premium Architectural Hardware & Plumbing Logo"
-                width={50}
-                height={50}
-                className="navbar-logo-img"
-                style={{ objectFit: 'contain' }}
-                priority
-              />
-            </div>
-            <div className="navbar-text">
-              <span className="navbar-title">Iron & Water Co.</span>
-            </div>
-          </a>
-          <div className="navbar-links" role="list">
-            <a href="#services" className="nav-link" role="listitem">Services</a>
-            <a href="/store" className="nav-link" role="listitem">Store</a>
-            <a href="/vendors" className="nav-link" role="listitem">Vendors</a>
-            <a href="/knowledgebase" className="nav-link" role="listitem">Knowledgebase</a>
-            <a href="/faq" className="nav-link" role="listitem">FAQ</a>
-            <a href="#contact" className="nav-link" role="listitem">Contact</a>
-            <button className="nav-cta" onClick={openModal} aria-label="Join Our Founders Circle - Early Access Form">Join Our Founders Circle</button>
-          </div>
-        </div>
-      </nav>
+      <Navbar activePage="home" />
 
       {/* Hero Section */}
       <header className="hero-container" role="banner">
