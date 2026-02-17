@@ -25,42 +25,25 @@ const smtpPort = parseInt(process.env.SMTP_PORT || "587");
 const fromEmail = process.env.FROM_EMAIL || smtpUser;
 const fromName = process.env.FROM_NAME || "Iron & Water Co.";
 
-if (!smtpUser || !smtpPassword) {
-  console.warn("⚠️  SMTP_USER and SMTP_PASSWORD (or EMAIL_USER and EMAIL_PASS) must be set in .env.local for email functionality");
-}
-
-// Create transporter with Gmail/Google Workspace configuration
-// Works for both @gmail.com and custom domains (Google Workspace)
 const transporter = nodemailer.createTransport({
   host: smtpHost,
   port: smtpPort,
-  secure: smtpPort === 465, // Use SSL for port 465, TLS for port 587
+  secure: smtpPort === 465,
   auth: {
     user: smtpUser,
     pass: smtpPassword,
   },
-  // Add debug option for troubleshooting
-  debug: process.env.NODE_ENV === "development",
-  logger: process.env.NODE_ENV === "development",
 });
 
-// Parse notification emails from environment variable
-// Handles comma-separated list with optional spaces
 const notificationRecipients = process.env.NOTIFICATION_EMAILS
   ? process.env.NOTIFICATION_EMAILS.split(",")
       .map(email => email.trim())
       .filter(email => email.length > 0)
   : [];
 
-// Log notification recipients (only in development)
-if (process.env.NODE_ENV === "development") {
-  console.log(`Notification emails configured: ${notificationRecipients.length > 0 ? notificationRecipients.join(", ") : "None (NOTIFICATION_EMAILS not set)"}`);
-}
-
-// Logo URL - use environment variable or default to placeholder
-const logoUrl = process.env.NEXT_PUBLIC_SITE_URL 
+const logoUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? `${process.env.NEXT_PUBLIC_SITE_URL}/logo-long.jpg`
-  : "https://ironandwaterco.com/logo-long.jpg"; // Update with your actual domain
+  : "https://ironandwaterco.com/logo-long.jpg";
 
 export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
   const mailOptions = {
@@ -317,10 +300,8 @@ export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
     if (!smtpUser || !smtpPassword) {
       throw new Error("Email credentials not configured. Please set SMTP_USER and SMTP_PASSWORD (or EMAIL_USER and EMAIL_PASS) in .env.local");
     }
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Welcome email sent successfully:", info.response);
+    await transporter.sendMail(mailOptions);
   } catch (error: any) {
-    console.error("Error sending welcome email:", error);
     if (error.code === "EAUTH") {
       const emailDomain = smtpUser?.split("@")[1] || "";
       const isCustomDomain = emailDomain !== "gmail.com";
@@ -345,10 +326,7 @@ export async function sendWelcomeEmail(data: WelcomeEmailData): Promise<void> {
 }
 
 export async function sendNotificationEmail(data: NotificationEmailData): Promise<void> {
-  if (notificationRecipients.length === 0) {
-    console.warn("⚠️  No notification recipients configured. Set NOTIFICATION_EMAILS in .env.local");
-    return;
-  }
+  if (notificationRecipients.length === 0) return;
 
   const mailOptions = {
     from: `"${fromName}" <${fromEmail}>`,
@@ -533,10 +511,8 @@ export async function sendNotificationEmail(data: NotificationEmailData): Promis
     if (!smtpUser || !smtpPassword) {
       throw new Error("Email credentials not configured. Please set SMTP_USER and SMTP_PASSWORD (or EMAIL_USER and EMAIL_PASS) in .env.local");
     }
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Notification email sent successfully:", info.response);
+    await transporter.sendMail(mailOptions);
   } catch (error: any) {
-    console.error("Error sending notification email:", error);
     if (error.code === "EAUTH") {
       const emailDomain = smtpUser?.split("@")[1] || "";
       const isCustomDomain = emailDomain !== "gmail.com";

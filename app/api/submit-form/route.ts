@@ -6,7 +6,6 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { name, company, role, email, phone, zip, interests, foundersPreview } = body
 
-    // Validate required fields
     if (!name || !role || !email || !zip || !interests) {
       return NextResponse.json(
         { error: 'Missing required fields' },
@@ -14,13 +13,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Send welcome email to the user
-    await sendWelcomeEmail({
-      name,
-      email,
-    })
+    await sendWelcomeEmail({ name, email })
 
-    // Send notification email to configured recipients
     await sendNotificationEmail({
       name,
       company: company || undefined,
@@ -37,7 +31,6 @@ export async function POST(request: NextRequest) {
       message: 'Form submitted successfully',
     })
   } catch (error: any) {
-    console.error('Form submission error:', error)
     return NextResponse.json(
       { error: 'Failed to submit form', details: error.message },
       { status: 500 }

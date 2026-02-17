@@ -1,13 +1,6 @@
-// Shared Cin7 API helper with global rate limiting
-// All API routes should use this instead of their own fetch functions
-// State is stored on globalThis to survive Next.js hot reloads in dev
-
 const CIN7_API_BASE_URL = 'https://inventory.dearsystems.com/externalapi'
 const CIN7_API_USERNAME = process.env.CIN7_API_USERNAME
 const CIN7_API_KEY = process.env.CIN7_API_KEY
-
-// --- Global rate limiter (token bucket: 50 tokens per 60s, safe margin under Cin7's 60/min) ---
-// Stored on globalThis so hot reloads don't reset the token count
 
 interface RateLimitState {
   tokens: number
@@ -28,7 +21,6 @@ const rateLimit: RateLimitState = g.__cin7RateLimit
 const RATE_LIMIT_WINDOW_MS = 60_000
 const RATE_LIMIT_MAX_TOKENS = 50
 
-// Serialize all API calls through a queue so only one request fires at a time
 function enqueueRequest<T>(fn: () => Promise<T>): Promise<T> {
   const result = rateLimit.requestQueue.then(fn, fn)
   rateLimit.requestQueue = result.then(() => {}, () => {})
@@ -49,7 +41,6 @@ async function acquireRateLimitToken(): Promise<void> {
   }
 
   const waitMs = RATE_LIMIT_WINDOW_MS - elapsed + 2000
-  console.log(`[Rate limit] No tokens left, waiting ${Math.round(waitMs / 1000)}s...`)
   await new Promise(resolve => setTimeout(resolve, waitMs))
   rateLimit.tokens = RATE_LIMIT_MAX_TOKENS - 1
   rateLimit.lastRefill = Date.now()
@@ -91,7 +82,6 @@ export async function fetchCin7Data(
       if (response.status === 429) {
         const retryAfter = parseInt(response.headers.get('Retry-After') || '0', 10)
         const waitMs = retryAfter > 0 ? retryAfter * 1000 : 65_000
-        console.log(`[Rate limit] 429 on ${endpoint}, attempt ${attempt}/${MAX_RETRIES}, waiting ${Math.round(waitMs / 1000)}s...`)
         rateLimit.tokens = 0
         rateLimit.lastRefill = Date.now()
         if (attempt < MAX_RETRIES) {
@@ -105,25 +95,16 @@ export async function fetchCin7Data(
       const responseText = await response.text()
 
       if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
-        if (!silent) {
-          console.error('Cin7 API returned HTML instead of JSON:', responseText.substring(0, 500))
-        }
         throw new Error(`Cin7 API returned HTML error page. Status: ${response.status}.`)
       }
 
       if (!response.ok) {
-        if (!silent) {
-          console.error('Cin7 API error response:', { status: response.status, statusText: response.statusText })
-        }
         throw new Error(`Cin7 API error: ${response.status} - ${response.statusText}`)
       }
 
       try {
         return JSON.parse(responseText)
       } catch (parseError) {
-        if (!silent) {
-          console.error('Failed to parse JSON response:', responseText.substring(0, 500))
-        }
         throw new Error(`Invalid JSON response from Cin7 API: ${parseError}`)
       }
     }

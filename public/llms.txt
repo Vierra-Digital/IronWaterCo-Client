@@ -1,5 +1,4 @@
 # Iron & Water Co. - LLMs.txt
-# This file provides information about our website for AI language models and crawlers
 
 # Site Information
 Site: https://ironandwaterco.com
@@ -27,15 +26,17 @@ Home: https://ironandwaterco.com/
 Store: https://ironandwaterco.com/store
 Vendors: https://ironandwaterco.com/vendors
 Knowledgebase: https://ironandwaterco.com/knowledgebase
+Insights: https://ironandwaterco.com/insights
 FAQ: https://ironandwaterco.com/faq
 
 # Guide Articles
 Wall-Hung Toilets NYC Coop/Condo Guide: https://ironandwaterco.com/guides/wall-hung-toilets-nyc-coop-condo
 Wall-Hung Toilets In-Wall Carriers Coop Approval: https://ironandwaterco.com/guides/wall-hung-toilets-in-wall-carriers-coop-approval
+Kosher Material Reference Blanco Silgranit: https://ironandwaterco.com/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks
 
 # Product Catalog
 Product Catalog: https://ironandwaterco.com/store
-Product Count: ~26,000+ products
+Product Count: 160,000+ products
 Categories: Architectural hardware, plumbing fixtures, bathroom accessories, kitchen fixtures, and more
 
 # Sitemap
@@ -55,10 +56,11 @@ LinkedIn: https://www.linkedin.com/company/iron-water-co/
 - Design partnership
 
 # Key Features
-- Comprehensive product catalog with 26,000+ items
+- Comprehensive product catalog with 160,000+ items
 - Advanced search and filtering capabilities
 - Category-based browsing
 - Vendor information and resources
+- Insights and industry articles
 - Knowledge base with expert resources
 - FAQ section
 - Educational guides for trade professionals
@@ -67,6 +69,7 @@ LinkedIn: https://www.linkedin.com/company/iron-water-co/
 # Content Types
 - Product listings with detailed specifications
 - Vendor profiles and information
+- Insights and industry articles
 - Educational articles and guides
 - FAQ content
 - Knowledge base resources
@@ -79,7 +82,6 @@ Service Area: United States
 
 # Contact & Support
 Customer Service Email: customerexperience@ironandwaterco.com
-Business Email: business@alexshick.com
 Phone Support: 329-233-6638
 Showroom Address: 1506 Northern Blvd, Manhasset, NY 11030
 
@@ -90,5 +92,4 @@ Content: Server-side rendered with client-side interactivity
 API: RESTful API endpoints for product data and form submissions
 
 # Last Updated
-Last Updated: 2024
-
+Last Updated: 2026

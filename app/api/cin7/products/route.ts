@@ -5,7 +5,7 @@ import { fetchCin7Data } from '@/lib/cin7Api'
 
 const FULL_LIST_CACHE_KEY = 'products:full-list-unfiltered'
 const TOTAL_CACHE_KEY = 'products:total'
-const CACHE_TTL = 2 * 60 * 60 * 1000 // 2 hours
+const CACHE_TTL = 2 * 60 * 60 * 1000
 
 interface Cin7Product {
   ID: string
@@ -30,10 +30,6 @@ interface Cin7Product {
   [key: string]: any
 }
 
-// fetchCin7Data is imported from @/lib/cin7Api (shared rate limiter)
-
-// --- Total count discovery ---
-
 async function discoverTotalProducts(): Promise<number> {
   const cached = cin7Cache.get<number>(TOTAL_CACHE_KEY)
   if (cached) return cached
@@ -43,17 +39,14 @@ async function discoverTotalProducts(): Promise<number> {
     const total = data.Total || data.total || data.Count || data.count || 0
     if (total > 0) {
       cin7Cache.set(TOTAL_CACHE_KEY, total, CACHE_TTL)
-      console.log(`Discovered total product count: ${total.toLocaleString()}`)
       return total
     }
-  } catch (error: any) {
-    console.error('Failed to discover total:', error.message)
+  } catch {
+    // Fall through to default
   }
 
-  return 200000 // Generous fallback
+  return 200000
 }
-
-// --- Background warming (state on globalThis to survive hot reloads) ---
 
 const _g = globalThis as any
 if (_g.__cin7WarmState === undefined) {
@@ -72,9 +65,6 @@ async function fetchAllProductsInBackground(): Promise<void> {
     const allProducts: Cin7Product[] = []
     const categorySet = new Set<string>()
 
-    console.log(`[Background warm] Starting fetch of ~${totalCount.toLocaleString()} products (up to ${maxPages} pages)...`)
-
-    // Fetch pages sequentially -- the rate limiter in fetchCin7Data handles pacing
     for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
       try {
         const batchData = await fetchCin7Data('/Products', {
@@ -84,8 +74,6 @@ async function fetchAllProductsInBackground(): Promise<void> {
         const batchProducts = batchData.Products || batchData.ProductsList || batchData || []
         if (Array.isArray(batchProducts) && batchProducts.length > 0) {
           allProducts.push(...batchProducts)
-
-          // Extract categories incrementally from each page
           batchProducts.forEach((product: Cin7Product) => {
             const cat = product.Category || product.category || product.ProductCategory || product.CategoryName
             if (cat && cat !== 'Uncategorized' && typeof cat === 'string') {
@@ -96,32 +84,22 @@ async function fetchAllProductsInBackground(): Promise<void> {
           break
         }
       } catch (error: any) {
-        console.error(`[Background warm] Error page ${pageNum}:`, error.message)
         if (error.message?.includes('429')) break
       }
 
-      // Every 10 pages: log progress and update the categories cache so they're available early
-      if (pageNum % 10 === 0) {
-        console.log(`[Background warm] Progress: ${allProducts.length.toLocaleString()} products, ${categorySet.size} categories (page ${pageNum})`)
-        if (categorySet.size > 0) {
-          cin7Cache.set('categories:all', Array.from(categorySet).sort(), CACHE_TTL)
-        }
+      if (pageNum % 10 === 0 && categorySet.size > 0) {
+        cin7Cache.set('categories:all', Array.from(categorySet).sort(), CACHE_TTL)
       }
     }
 
     if (allProducts.length > 0) {
       cin7Cache.set(FULL_LIST_CACHE_KEY, allProducts, CACHE_TTL)
       cin7Cache.set(TOTAL_CACHE_KEY, allProducts.length, CACHE_TTL)
-
       writeProductFileCache(allProducts, allProducts.length)
-
-      // Final categories update with all products
       cin7Cache.set('categories:all', Array.from(categorySet).sort(), CACHE_TTL)
-
-      console.log(`[Background warm] Complete: ${allProducts.length.toLocaleString()} products, ${categorySet.size} categories cached`)
     }
-  } catch (error: any) {
-    console.error('[Background warm] Failed:', error.message)
+  } catch {
+    // Background warm failed
   } finally {
     warmState.inProgress = false
     warmState.promise = null
@@ -133,30 +111,19 @@ function startBackgroundWarm(): void {
   warmState.promise = fetchAllProductsInBackground()
 }
 
-// --- Get full product list (memory → file → background warm) ---
-
 function getFullProductList(): Cin7Product[] | null {
-  // 1. Memory cache (fastest)
   const memoryCached = cin7Cache.get<Cin7Product[]>(FULL_LIST_CACHE_KEY)
-  if (memoryCached && memoryCached.length > 0) {
-    return memoryCached
-  }
+  if (memoryCached && memoryCached.length > 0) return memoryCached
 
-  // 2. File cache (survives restarts)
   const fileCached = readProductFileCache()
   if (fileCached && fileCached.products.length > 0) {
-    // Promote to memory cache
     cin7Cache.set(FULL_LIST_CACHE_KEY, fileCached.products, CACHE_TTL)
     cin7Cache.set(TOTAL_CACHE_KEY, fileCached.total, CACHE_TTL)
-    console.log(`Promoted ${fileCached.products.length.toLocaleString()} products from file cache to memory`)
     return fileCached.products
   }
 
-  // 3. No cache available
   return null
 }
-
-// --- Sales data ---
 
 async function getProductSalesData(): Promise<Record<string, number>> {
   const cacheKey = getSalesDataCacheKey()
@@ -201,8 +168,6 @@ async function getProductSalesData(): Promise<Record<string, number>> {
   return salesCounts
 }
 
-// --- Cache invalidation ---
-
 function invalidateAllProductCaches(): void {
   cin7Cache.delete(FULL_LIST_CACHE_KEY)
   cin7Cache.delete(TOTAL_CACHE_KEY)
@@ -211,10 +176,7 @@ function invalidateAllProductCaches(): void {
   clearProductFileCache()
   warmState.inProgress = false
   warmState.promise = null
-  console.log('[Cache] All product caches invalidated')
 }
-
-// --- Main GET handler ---
 
 export async function GET(request: NextRequest) {
   try {
@@ -229,22 +191,15 @@ export async function GET(request: NextRequest) {
     const sortOrder = sortOrderParam || (sortBy === 'popularity' ? 'desc' : 'asc')
     const refresh = searchParams.get('refresh') === 'true'
 
-    // If refresh requested, clear all caches and force a re-fetch
     if (refresh) {
-      console.log('[Refresh] Manual cache refresh triggered')
       invalidateAllProductCaches()
     }
 
-    // Try to get the full product list from cache (memory or file)
     let allProducts = getFullProductList()
     const hasFullList = allProducts !== null && allProducts.length > 0
 
-    // If no full list cached, start background warming and serve from API directly
     if (!hasFullList) {
       startBackgroundWarm()
-
-      // Fast path: fetch just the current page from the API directly (1 API call)
-      console.log(`Cache cold - serving page ${page} directly from API while background warm runs`)
 
       const params: Record<string, string> = {
         page: page.toString(),
@@ -262,7 +217,6 @@ export async function GET(request: NextRequest) {
         cin7Cache.set(TOTAL_CACHE_KEY, apiTotal, CACHE_TTL)
       }
 
-      // Transform and return the single page
       const products = (Array.isArray(pageProducts) ? pageProducts : []).map((product: Cin7Product) => ({
         id: String(product.ID || product.id || product.Id || ''),
         name: product.Name || product.name || 'Unnamed Product',
@@ -290,10 +244,8 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    // Full list is available - use it for search, sort, and filter
     let totalCount = allProducts!.length
 
-    // Fetch sales data if sorting by popularity
     let salesData: Record<string, number> = {}
     if (sortBy === 'popularity') {
       try {
@@ -303,7 +255,6 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Get category map (cached in memory to avoid extra API calls)
     const CATEGORY_MAP_KEY = 'categories:id-map'
     let categoryMap: Record<string, string> = cin7Cache.get<Record<string, string>>(CATEGORY_MAP_KEY) || {}
 
@@ -322,11 +273,10 @@ export async function GET(request: NextRequest) {
           cin7Cache.set(CATEGORY_MAP_KEY, categoryMap, CACHE_TTL)
         }
       } catch {
-        // Category API not available -- use product category fields directly
+        // Use product category fields directly
       }
     }
 
-    // Transform all products
     const products = allProducts!.map((product: Cin7Product) => {
       const categoryId = product.CategoryID || product.categoryID || product.CategoryId
       const categoryName = categoryId && categoryMap[categoryId]
@@ -351,7 +301,6 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    // Filter
     let filteredProducts = products
 
     if (category && category !== 'all') {
@@ -371,7 +320,6 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    // Sort
     let sortedProducts = [...filteredProducts]
     if (sortBy === 'name') {
       sortedProducts.sort((a, b) => {
@@ -412,7 +360,6 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    // Paginate
     const startIndex = (page - 1) * limit
     const paginatedProducts = sortedProducts.slice(startIndex, startIndex + limit)
 
@@ -430,7 +377,6 @@ export async function GET(request: NextRequest) {
       cacheStatus: 'ready',
     })
   } catch (error: any) {
-    console.error('Cin7 API error:', error.message)
     return NextResponse.json(
       {
         success: false,
@@ -442,8 +388,6 @@ export async function GET(request: NextRequest) {
     )
   }
 }
-
-// --- POST handler: Force refresh the product cache ---
 
 export async function POST(request: NextRequest) {
   try {

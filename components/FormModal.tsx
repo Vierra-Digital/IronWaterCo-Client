@@ -63,7 +63,6 @@ export default function FormModal({ isOpen, onClose }: ModalProps) {
 
       setIsSubmitted(true)
     } catch (err: any) {
-      console.error('Form submission error:', err)
       setError(err.message || 'Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)

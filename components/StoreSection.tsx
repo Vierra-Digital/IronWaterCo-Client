@@ -96,38 +96,23 @@ export default function StoreSection({ initialProducts = [] }: StoreSectionProps
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}))
           const errorMessage = errorData.message || errorData.error || `HTTP ${response.status}: ${response.statusText}`
-          console.error('API response error:', {
-            status: response.status,
-            statusText: response.statusText,
-            error: errorMessage,
-            details: errorData.details,
-          })
           setError(errorMessage || 'Failed to load products')
           return
         }
         
         const data = await response.json()
-        console.log('Products API response:', { success: data.success, productCount: data.products?.length, total: data.total })
 
         if (data.success) {
           setProducts(data.products || [])
           setFilteredProducts(data.products || [])
-          // Store total for pagination
           if (data.total !== undefined) {
             setTotalProducts(data.total)
           }
         } else {
           const errorMessage = data.message || data.error || 'Failed to load products'
-          console.error('API returned success:false:', { message: errorMessage, data })
           setError(errorMessage)
         }
       } catch (err: any) {
-        console.error('Error fetching products:', err)
-        console.error('Error details:', {
-          message: err.message,
-          stack: err.stack,
-          name: err.name,
-        })
         setError(`Failed to load products: ${err.message || 'Unknown error'}`)
       } finally {
         setLoading(false)
@@ -172,8 +157,8 @@ export default function StoreSection({ initialProducts = [] }: StoreSectionProps
           }
           return
         }
-      } catch (error) {
-        console.error('Error fetching categories:', error)
+      } catch {
+        // Categories fetch failed, will retry
       }
 
       setCategoriesLoading(false)
