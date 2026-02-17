@@ -118,21 +118,6 @@ export default function FAQSection() {
 
   useEffect(() => {
     setIsVisible(true)
-    
-    // Parallax scrolling effect (disabled on mobile for performance)
-    if (window.innerWidth > 768) {
-      const handleScroll = () => {
-        if (headerRef.current && listRef.current) {
-          const scrolled = window.pageYOffset
-          const rate = scrolled * 0.2
-          headerRef.current.style.transform = `translateY(${rate}px)`
-          listRef.current.style.transform = `translateY(${-rate * 0.1}px)`
-        }
-      }
-
-      window.addEventListener('scroll', handleScroll)
-      return () => window.removeEventListener('scroll', handleScroll)
-    }
   }, [])
 
   useEffect(() => {
