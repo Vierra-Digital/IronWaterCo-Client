@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import FormModal from './FormModal'
@@ -12,6 +13,7 @@ interface NavbarProps {
 export default function Navbar({ activePage = 'home' }: NavbarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     setIsLoaded(true)
@@ -19,6 +21,30 @@ export default function Navbar({ activePage = 'home' }: NavbarProps) {
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
+
+  const router = useRouter()
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      router.push('/')
+      // Wait for navigation, then scroll to contact
+      const scrollToContact = () => {
+        const contactSection = document.getElementById('contact')
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' })
+        } else {
+          requestAnimationFrame(scrollToContact)
+        }
+      }
+      setTimeout(scrollToContact, 300)
+    }
+  }
 
   return (
     <>
@@ -46,7 +72,7 @@ export default function Navbar({ activePage = 'home' }: NavbarProps) {
             <Link href="/knowledgebase" className={`nav-link ${activePage === 'knowledgebase' ? 'nav-link-active' : ''}`} role="listitem">Knowledgebase</Link>
             <Link href="/insights" className={`nav-link ${activePage === 'insights' ? 'nav-link-active' : ''}`} role="listitem">Insights</Link>
             <Link href="/faq" className={`nav-link ${activePage === 'faq' ? 'nav-link-active' : ''}`} role="listitem">FAQ</Link>
-            <Link href="/#contact" className="nav-link" role="listitem">Contact</Link>
+            <a href="/#contact" className="nav-link" role="listitem" onClick={handleContactClick}>Contact</a>
             <button className="nav-cta" onClick={openModal} aria-label="Join Our Founders Circle - Early Access Form">Join Our Founders Circle</button>
           </div>
         </div>
