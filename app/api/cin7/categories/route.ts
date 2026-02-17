@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
           .sort()
 
         // Deduplicate
-        const uniqueCategories = [...new Set(categories)]
+        const uniqueCategories = Array.from(new Set(categories))
 
         if (uniqueCategories.length > 0) {
           cin7Cache.set(cacheKey, uniqueCategories, CACHE_TTL)
