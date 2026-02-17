@@ -37,7 +37,7 @@ export default function StoreSection({ initialProducts = [] }: StoreSectionProps
   const [searchQuery, setSearchQuery] = useState('')
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [sortBy, setSortBy] = useState<'name' | 'price' | 'category'>('name')
+  const [sortBy, setSortBy] = useState<'name' | 'price' | 'category' | 'brand'>('name')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   
   // Pagination state
@@ -146,56 +146,63 @@ export default function StoreSection({ initialProducts = [] }: StoreSectionProps
   const startIndex = (currentPage - 1) * productsPerPage + 1
   const endIndex = Math.min(currentPage * productsPerPage, totalProducts || filteredProducts.length)
 
-  // Fetch all categories from API
+  // Fetch all categories from API (with retries while background warm builds the list)
   const [categories, setCategories] = useState<string[]>([])
   const [categoriesLoading, setCategoriesLoading] = useState(true)
-  
+
   useEffect(() => {
+    let retryTimeout: NodeJS.Timeout | null = null
+    let retryCount = 0
+    let cancelled = false
+
     const fetchCategories = async () => {
-      setCategoriesLoading(true)
       try {
         const response = await fetch('/api/cin7/categories')
         const data = await response.json()
-        console.log('Categories API response:', { success: data.success, count: data.categories?.length })
         if (data.success && Array.isArray(data.categories) && data.categories.length > 0) {
           setCategories(data.categories)
-          console.log(`Loaded ${data.categories.length} categories`)
-        } else if (data.success && Array.isArray(data.categories) && data.categories.length === 0) {
-          // If categories array is empty, try fallback
-          console.log('Categories array is empty, using fallback from products')
-          const categorySet = new Set<string>()
-          products.forEach((product) => {
-            if (product.category && product.category !== 'Uncategorized') {
-              categorySet.add(product.category)
+          setCategoriesLoading(false)
+
+          // If background warm is still running, check again later for more categories
+          if (retryCount < 12 && data.categories.length < 20) {
+            retryCount++
+            if (!cancelled) {
+              retryTimeout = setTimeout(fetchCategories, 15000)
             }
-          })
-          const fallbackCategories = Array.from(categorySet).sort()
-          if (fallbackCategories.length > 0) {
-            setCategories(fallbackCategories)
-            console.log(`Using ${fallbackCategories.length} categories from current products`)
           }
+          return
         }
       } catch (error) {
         console.error('Error fetching categories:', error)
-        // Fallback to categories from current products
-        const categorySet = new Set<string>()
-        products.forEach((product) => {
-          if (product.category && product.category !== 'Uncategorized') {
-            categorySet.add(product.category)
-          }
-        })
-        const fallbackCategories = Array.from(categorySet).sort()
-        if (fallbackCategories.length > 0) {
-          setCategories(fallbackCategories)
-          console.log(`Fallback: Using ${fallbackCategories.length} categories from current products`)
-        }
-      } finally {
-        setCategoriesLoading(false)
+      }
+
+      setCategoriesLoading(false)
+
+      // Retry up to 12 times (covers ~3 minutes of background warming)
+      if (retryCount < 12 && !cancelled) {
+        retryCount++
+        retryTimeout = setTimeout(fetchCategories, retryCount <= 3 ? 3000 : 15000)
       }
     }
-    
+
     fetchCategories()
-  }, [products])
+    return () => { cancelled = true; if (retryTimeout) clearTimeout(retryTimeout) }
+  }, [])
+
+  // Fallback: extract categories from loaded products if API hasn't returned any
+  useEffect(() => {
+    if (categories.length > 0 || products.length === 0) return
+    const categorySet = new Set<string>()
+    products.forEach((product) => {
+      if (product.category && product.category !== 'Uncategorized') {
+        categorySet.add(product.category)
+      }
+    })
+    const fallbackCategories = Array.from(categorySet).sort()
+    if (fallbackCategories.length > 0) {
+      setCategories(fallbackCategories)
+    }
+  }, [products, categories.length])
 
   // Intersection Observer for fade-in animations
   useEffect(() => {
@@ -329,13 +336,14 @@ export default function StoreSection({ initialProducts = [] }: StoreSectionProps
             <div className="select-wrapper">
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'category')}
+                onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'category' | 'brand')}
                 className="filter-select"
                 aria-label="Sort by"
               >
                 <option value="name">Sort by Name</option>
                 <option value="price">Sort by Price</option>
                 <option value="category">Sort by Category</option>
+                <option value="brand">Sort by Supplier</option>
               </select>
             </div>
 

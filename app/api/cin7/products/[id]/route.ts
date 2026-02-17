@@ -1,88 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cin7Cache, getProductCacheKey, getProductsCacheKey, getProductIndexCacheKey } from '@/lib/cin7Cache'
-
-// Cin7 API configuration
-// Dear Inventory API base URL - working endpoint format
-const CIN7_API_BASE_URL = 'https://inventory.dearsystems.com/externalapi'
-const CIN7_API_USERNAME = process.env.CIN7_API_USERNAME
-const CIN7_API_KEY = process.env.CIN7_API_KEY
-
-interface Cin7Product {
-  ID: string
-  Name: string
-  SKU: string
-  Description?: string
-  Price?: number
-  PriceTier1?: number
-  'Price Tier 1'?: number
-  PriceTier1Price?: number
-  Cost?: number
-  Category?: string
-  CategoryID?: string
-  CategoryId?: string
-  categoryID?: string
-  CategoryName?: string
-  ProductCategory?: string
-  Brand?: string
-  Images?: string[]
-  StockOnHand?: number
-  Attributes?: Record<string, any>
-  [key: string]: any
-}
-
-// Helper function to make authenticated requests to Cin7 API
-async function fetchCin7Data(endpoint: string, params?: Record<string, string>, baseUrlOverride?: string, silent = false) {
-  if (!CIN7_API_USERNAME || !CIN7_API_KEY) {
-    throw new Error('Cin7 API credentials are not configured')
-  }
-
-  const baseUrl = baseUrlOverride || CIN7_API_BASE_URL
-  const url = new URL(`${baseUrl}${endpoint}`)
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      url.searchParams.append(key, value)
-    })
-  }
-
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    headers: {
-      'api-auth-accountid': CIN7_API_USERNAME,
-      'api-auth-applicationkey': CIN7_API_KEY,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-  })
-
-  const responseText = await response.text()
-  
-  if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
-    if (!silent) {
-      console.error('Cin7 API returned HTML instead of JSON:', responseText.substring(0, 500))
-    }
-    throw new Error(`Cin7 API returned HTML error page. Status: ${response.status}. Check API endpoint and credentials.`)
-  }
-
-  if (!response.ok) {
-    if (!silent) {
-      console.error('Cin7 API error response:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: responseText.substring(0, 500),
-      })
-    }
-    throw new Error(`Cin7 API error: ${response.status} - ${response.statusText}`)
-  }
-
-  try {
-    return JSON.parse(responseText)
-  } catch (parseError) {
-    if (!silent) {
-      console.error('Failed to parse JSON response:', responseText.substring(0, 500))
-    }
-    throw new Error(`Invalid JSON response from Cin7 API: ${parseError}`)
-  }
-}
+import { fetchCin7Data } from '@/lib/cin7Api'
 
 // GET endpoint to fetch a single product by ID from Cin7
 export async function GET(
@@ -215,95 +133,80 @@ export async function GET(
         if (foundInCache) break
       }
       
-      // If not found in cache, search through API products using parallel search
+      // Check the full product list cache (populated by background warm)
       if (!foundInCache) {
-        console.log('🔍 STEP 2: Product not found in cached products lists. Searching through API in parallel...')
-        try {
-          console.log('🔍 STEP 3: Parallel searching through products by SKU/ID:', productIdentifier)
-          const pageSize = 1000
-          const totalProducts = 26255 // Total number of products in Cin7
-          const totalPages = Math.ceil(totalProducts / pageSize) // ~27 pages
+        const fullListKey = 'products:full-list-unfiltered'
+        const fullList = cin7Cache.get<any[]>(fullListKey)
+        if (fullList && Array.isArray(fullList) && fullList.length > 0) {
           const searchValue = String(productIdentifier).trim()
-          
-          // Parallel search: search multiple pages at once (5 pages at a time to avoid rate limits)
-          const batchSize = 5 // Search 5 pages in parallel
+          const foundProduct = fullList.find((p: any) => {
+            const pSku = String(p.SKU || p.sku || p.Sku || '').trim()
+            const pId = String(p.ID || p.id || p.Id || '').trim()
+            if (pSku && pSku === searchValue) return true
+            if (pSku && pSku.toLowerCase() === searchValue.toLowerCase()) return true
+            if (pId === searchValue) return true
+            if (pId.toLowerCase() === searchValue.toLowerCase()) return true
+            return false
+          })
+          if (foundProduct) {
+            console.log('✓ Found product in full list cache')
+            data = foundProduct
+            foundInCache = true
+          }
+        }
+      }
+
+      // Last resort: sequential API search (rate-limited, one page at a time)
+      if (!foundInCache) {
+        console.log('Product not in any cache. Searching API sequentially...')
+        try {
+          const pageSize = 1000
+          const searchValue = String(productIdentifier).trim()
           let found = false
           let searchedPages = 0
-          
-          // Search in batches of 5 pages in parallel
-          for (let startPage = 1; startPage <= totalPages && !found; startPage += batchSize) {
-            const endPage = Math.min(startPage + batchSize - 1, totalPages)
-            console.log(`Searching pages ${startPage}-${endPage} in parallel...`)
-            
-            // Fetch all pages in this batch in parallel
-            const pagePromises = []
-            for (let page = startPage; page <= endPage; page++) {
-              pagePromises.push(
-                fetchCin7Data('/Products', { 
-                  page: page.toString(), 
-                  limit: pageSize.toString() 
-                }, undefined, true).catch((err) => {
-                  console.error(`Error fetching page ${page}:`, err.message)
-                  return null
-                })
-              )
-            }
-            
-            // Wait for all pages in this batch
-            const batchResults = await Promise.all(pagePromises)
-            
-            // Search through all results from this batch
-            for (let i = 0; i < batchResults.length; i++) {
-              const batchData = batchResults[i]
-              if (!batchData) continue
-              
-              const page = startPage + i
+
+          for (let page = 1; page <= 200 && !found; page++) {
+            try {
+              const batchData = await fetchCin7Data('/Products', {
+                page: page.toString(),
+                limit: pageSize.toString(),
+              }, undefined, true)
               const products = batchData.Products || batchData.ProductsList || batchData || []
-              
-              if (Array.isArray(products) && products.length > 0) {
-                searchedPages++
-                
-                // Try to find the product - prioritize SKU matching (more reliable)
-                const product = products.find((p: any) => {
-                  const pSku = String(p.SKU || p.sku || p.Sku || '').trim()
-                  const pId = String(p.ID || p.id || p.Id || '').trim()
-                  
-                  // Try exact SKU match first (most reliable)
-                  if (pSku && pSku === searchValue) return true
-                  // Try SKU match (case-insensitive)
-                  if (pSku && pSku.toLowerCase() === searchValue.toLowerCase()) return true
-                  // Try ID exact match (fallback)
-                  if (pId === searchValue) return true
-                  // Try ID case-insensitive match (fallback)
-                  if (pId.toLowerCase() === searchValue.toLowerCase()) return true
-                  // Try without dashes (UUID format) - fallback
-                  const pIdNoDashes = pId.replace(/-/g, '').toLowerCase()
-                  const searchValueNoDashes = searchValue.replace(/-/g, '').toLowerCase()
-                  if (pIdNoDashes && searchValueNoDashes && pIdNoDashes === searchValueNoDashes) return true
-                  return false
-                })
-                
-                if (product) {
-                  console.log(`✓ Product found in page ${page}! SKU: ${product.SKU || product.sku || 'N/A'}, ID: ${product.ID || product.id || 'N/A'}`)
-                  data = product
-                  found = true
-                  break
-                }
+
+              if (!Array.isArray(products) || products.length === 0) break
+
+              searchedPages++
+              const product = products.find((p: any) => {
+                const pSku = String(p.SKU || p.sku || p.Sku || '').trim()
+                const pId = String(p.ID || p.id || p.Id || '').trim()
+                if (pSku && pSku === searchValue) return true
+                if (pSku && pSku.toLowerCase() === searchValue.toLowerCase()) return true
+                if (pId === searchValue) return true
+                if (pId.toLowerCase() === searchValue.toLowerCase()) return true
+                return false
+              })
+
+              if (product) {
+                console.log(`✓ Product found on page ${page}`)
+                data = product
+                found = true
               }
+            } catch (error: any) {
+              if (error.message?.includes('429')) {
+                console.log('Rate limited during product search, stopping')
+                break
+              }
+              console.error(`Error fetching page ${page}:`, error.message)
             }
-            
-            if (found) break
           }
-          
+
           if (!found) {
-            console.error(`Product with SKU/ID ${productIdentifier} not found after searching ${searchedPages} pages`)
             return NextResponse.json(
-              { 
-                success: false, 
+              {
+                success: false,
                 error: 'Product not found',
-                searchedPages: searchedPages,
                 productIdentifier: productIdentifier,
-                message: `Searched through ${searchedPages * pageSize} products but could not find product with SKU/ID: ${productIdentifier}`,
+                message: `Searched ${searchedPages} pages but could not find product with SKU/ID: ${productIdentifier}`,
               },
               { status: 404 }
             )
