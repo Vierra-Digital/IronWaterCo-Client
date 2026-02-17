@@ -44,14 +44,16 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
         title: `${product.name} | Iron & Water Co.`,
         description: product.description || `View ${product.name} at Iron & Water Co.`,
         url: `${siteUrl}/store/${params.id}`,
+        siteName: 'Iron & Water Co.',
         type: 'website',
-        images: product.images && product.images.length > 0 ? [product.images[0]] : [],
+        images: product.images && product.images.length > 0 ? [product.images[0]] : [`${siteUrl}/logo-long.jpg`],
       },
       twitter: {
         card: 'summary_large_image',
         title: `${product.name} | Iron & Water Co.`,
         description: product.description || `View ${product.name} at Iron & Water Co.`,
-        images: product.images && product.images.length > 0 ? [product.images[0]] : [],
+        images: product.images && product.images.length > 0 ? [product.images[0]] : [`${siteUrl}/logo-long.jpg`],
+        creator: '@ironandwaterco',
       },
       alternates: {
         canonical: `${siteUrl}/store/${params.id}`,

@@ -23,12 +23,23 @@ export const metadata: Metadata = {
     title: 'FAQ | Iron & Water Co.',
     description: 'Frequently asked questions about wall-hung toilets, carrier systems, and installation requirements. Get expert guidance for your next project.',
     url: `${siteUrl}/faq`,
+    siteName: 'Iron & Water Co.',
     type: 'website',
+    images: [
+      {
+        url: `${siteUrl}/logo-long.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Iron & Water Co. FAQ',
+      },
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'FAQ | Iron & Water Co.',
     description: 'Frequently asked questions about wall-hung toilets, carrier systems, and installation requirements.',
+    images: [`${siteUrl}/logo-long.jpg`],
+    creator: '@ironandwaterco',
   },
   alternates: {
     canonical: `${siteUrl}/faq`,
@@ -83,11 +94,24 @@ export default function FAQPage() {
     ],
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${siteUrl}/faq` },
+    ],
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Navbar activePage="faq" />
       <FAQSection />

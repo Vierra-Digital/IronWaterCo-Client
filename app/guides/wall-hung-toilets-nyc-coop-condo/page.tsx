@@ -26,15 +26,26 @@ export const metadata: Metadata = {
     title: 'Wall-Hung Toilets in NYC Co-Op & Condo Buildings: Local Approval Notes & Planning Considerations',
     description: 'NYC-specific guidance for wall-hung toilet installations in co-op and condo buildings. Learn what boards typically ask, approval language, and local building considerations.',
     url: `${siteUrl}/guides/wall-hung-toilets-nyc-coop-condo`,
+    siteName: 'Iron & Water Co.',
     type: 'article',
     publishedTime: '2025-12-27',
     authors: ['Iron & Water Co.'],
     tags: ['plumbing', 'NYC', 'co-op approval', 'wall-hung toilets', 'NYC building code'],
+    images: [
+      {
+        url: `${siteUrl}/logo-long.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Wall-Hung Toilets in NYC Guide - Iron & Water Co.',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Wall-Hung Toilets in NYC Co-Op & Condo Buildings: Local Approval Notes & Planning Considerations',
     description: 'NYC-specific guidance for wall-hung toilet installations. Learn what boards typically ask and approval language.',
+    images: [`${siteUrl}/logo-long.jpg`],
+    creator: '@ironandwaterco',
   },
   alternates: {
     canonical: `${siteUrl}/guides/wall-hung-toilets-nyc-coop-condo`,
@@ -76,13 +87,27 @@ export default function NYCWallHungToiletsGuide() {
     },
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Knowledgebase', item: `${siteUrl}/knowledgebase` },
+      { '@type': 'ListItem', position: 3, name: 'Wall-Hung Toilets in NYC', item: `${siteUrl}/guides/wall-hung-toilets-nyc-coop-condo` },
+    ],
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Navbar activePage="home" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <Navbar activePage="knowledgebase" />
       <NYCGuideContent />
       <Footer />
     </>

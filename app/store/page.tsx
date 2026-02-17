@@ -23,12 +23,23 @@ export const metadata: Metadata = {
     title: 'Store | Iron & Water Co.',
     description: 'Browse our curated collection of plumbing fixtures, hardware, and construction products.',
     url: `${siteUrl}/store`,
+    siteName: 'Iron & Water Co.',
     type: 'website',
+    images: [
+      {
+        url: `${siteUrl}/logo-long.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Iron & Water Co. Store',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Store | Iron & Water Co.',
     description: 'Browse our curated collection of plumbing fixtures, hardware, and construction products.',
+    images: [`${siteUrl}/logo-long.jpg`],
+    creator: '@ironandwaterco',
   },
   alternates: {
     canonical: `${siteUrl}/store`,

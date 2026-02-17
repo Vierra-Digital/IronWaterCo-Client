@@ -78,9 +78,7 @@ export const metadata: Metadata = {
     // yandex: 'your-yandex-verification-code',
     // bing: 'your-bing-verification-code',
   },
-  alternates: {
-    canonical: siteUrl,
-  },
+  alternates: {},
   category: 'Architecture & Design',
 }
 
@@ -92,7 +90,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href={siteUrl} />
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/logo.png" />

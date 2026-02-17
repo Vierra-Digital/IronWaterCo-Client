@@ -23,12 +23,23 @@ export const metadata: Metadata = {
     title: 'Knowledgebase | Iron & Water Co.',
     description: 'Expert guides and resources for architectural hardware, plumbing systems, and installation best practices.',
     url: `${siteUrl}/knowledgebase`,
+    siteName: 'Iron & Water Co.',
     type: 'website',
+    images: [
+      {
+        url: `${siteUrl}/logo-long.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Iron & Water Co. Knowledgebase',
+      },
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Knowledgebase | Iron & Water Co.',
     description: 'Expert guides and resources for architectural hardware, plumbing systems, and installation best practices.',
+    images: [`${siteUrl}/logo-long.jpg`],
+    creator: '@ironandwaterco',
   },
   alternates: {
     canonical: `${siteUrl}/knowledgebase`,
@@ -67,11 +78,24 @@ export default function KnowledgebasePage() {
     },
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Knowledgebase', item: `${siteUrl}/knowledgebase` },
+    ],
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Navbar activePage="knowledgebase" />
       <KnowledgebaseSection />

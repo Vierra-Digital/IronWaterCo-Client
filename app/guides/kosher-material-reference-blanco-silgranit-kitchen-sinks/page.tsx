@@ -24,15 +24,26 @@ export const metadata: Metadata = {
     title: 'Kosher Material Reference: Blanco Silgranit Kitchen Sinks',
     description: 'A supporting reference for clients who maintain kosher kitchens. Review material considerations related to Blanco Silgranit kitchen sinks with documentation from the Zomet Institute.',
     url: `${siteUrl}/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks`,
+    siteName: 'Iron & Water Co.',
     type: 'article',
     publishedTime: '2026-01-18',
     authors: ['Iron & Water Co.'],
     tags: ['kosher', 'kitchen sinks', 'Blanco', 'Silgranit', 'material reference'],
+    images: [
+      {
+        url: `${siteUrl}/logo-long.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Kosher Material Reference Guide - Iron & Water Co.',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kosher Material Reference: Blanco Silgranit Kitchen Sinks',
     description: 'A supporting reference for clients who maintain kosher kitchens. Review material considerations related to Blanco Silgranit kitchen sinks.',
+    images: [`${siteUrl}/logo-long.jpg`],
+    creator: '@ironandwaterco',
   },
   alternates: {
     canonical: `${siteUrl}/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks`,
@@ -69,13 +80,27 @@ export default function KosherMaterialReferenceGuide() {
     keywords: 'kosher kitchen sinks, Blanco Silgranit, kosher certification, kashering, Zomet Institute',
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Knowledgebase', item: `${siteUrl}/knowledgebase` },
+      { '@type': 'ListItem', position: 3, name: 'Kosher Material Reference: Blanco Silgranit', item: `${siteUrl}/guides/kosher-material-reference-blanco-silgranit-kitchen-sinks` },
+    ],
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Navbar activePage="home" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <Navbar activePage="knowledgebase" />
       <KosherGuideContent />
       <Footer />
     </>
