@@ -47,7 +47,7 @@ const vendors = [
   'Hendel & Hendel',
   'Herbeau',
   'HydroSystems',
-  'Incinerator',
+  'Insinkerator',
   'Jaclo',
   'Jorger',
   'Kartners',
