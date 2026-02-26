@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, Fragment } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Insight, InsightBlock } from '../data/insights'
 
 interface InsightContentProps {
@@ -117,6 +118,19 @@ export default function InsightContent({ insight }: InsightContentProps) {
               <li key={i}>{item}</li>
             ))}
           </ul>
+        )
+      case 'image':
+        return (
+          <figure key={index} className="insight-block insight-block-image fade-in">
+            <Image
+              src={block.src}
+              alt={block.alt}
+              width={1200}
+              height={900}
+              className="insight-image"
+            />
+            {block.caption && <figcaption className="insight-image-caption">{block.caption}</figcaption>}
+          </figure>
         )
       case 'paragraph':
       default:

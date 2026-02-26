@@ -5324,6 +5324,25 @@ section {
   background: rgba(212, 175, 55, 0.7);
 }
 
+.insight-block-image {
+  margin: 2.25rem 0;
+}
+
+.insight-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.insight-image-caption {
+  margin-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
 .insight-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 2rem;

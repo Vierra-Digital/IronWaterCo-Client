@@ -2,6 +2,7 @@ export type InsightBlock =
   | { type: 'paragraph'; content: string }
   | { type: 'heading'; content: string; subtitle?: string }
   | { type: 'list'; items: string[] }
+  | { type: 'image'; src: string; alt: string; caption?: string }
 
 export interface Insight {
   id: string
@@ -117,6 +118,122 @@ export const insights: Insight[] = [
       { type: 'paragraph', content: 'The future of door hardware will combine digital intelligence with mechanical integrity.' },
       { type: 'paragraph', content: 'The principles remain the same.' },
       { type: 'paragraph', content: 'Structure before surface.\nFunction before novelty.\nPermanence before trend.' },
+    ],
+  },
+  {
+    id: '2',
+    title: 'The Architectural Guide to Specifying a Residential Steam Shower',
+    subtitle: 'Steam Shower Generator Sizing, Electrical Requirements, and Installation Mistakes to Avoid',
+    slug: 'architectural-guide-to-specifying-a-residential-steam-shower',
+    summary: 'A technical guide to residential steam shower specification covering generator sizing, electrical requirements, insulation, sequencing, and field-proven installation mistakes to avoid.',
+    category: 'Specification Series',
+    date: '2026-02-25',
+    readTime: '12 min read',
+    body: [
+      { type: 'paragraph', content: 'Steam showers are often discussed as luxury features.\nThey are not.' },
+      { type: 'paragraph', content: 'A properly specified steam system is wellness infrastructure. When executed correctly, it becomes a daily reset chamber embedded into the architecture of the home. When executed poorly, it becomes an expensive moisture problem.' },
+      { type: 'paragraph', content: 'This guide addresses steam shower generator sizing, electrical requirements, ceiling design, insulation strategy, and the most common field failures we see in residential construction.' },
+      { type: 'image', src: '/residential-steam-shower-guide.png', alt: 'Residential steam shower with brass-framed glass enclosure and active steam', caption: 'A residential steam enclosure should be specified as a complete performance system, not a fixture add-on.' },
+      { type: 'paragraph', content: 'Target audience layered:\nArchitects and designers get technical clarity.\nBuilders get sequencing and failure prevention.\nHomeowners get confidence and health context.\nSEO gets fed properly.' },
+
+      { type: 'heading', content: '1. Steam Shower Generator Sizing', subtitle: 'The Most Common and Most Costly Error' },
+      { type: 'paragraph', content: 'If a generator is undersized, the shower never reaches full vapor density. If oversized, energy usage climbs unnecessarily.' },
+      { type: 'paragraph', content: 'Correct sizing begins with cubic volume:' },
+      { type: 'paragraph', content: 'Length x Width x Height = Cubic Feet.' },
+      { type: 'paragraph', content: 'But raw cubic footage is not enough.' },
+      { type: 'heading', content: 'Material Multipliers Matter' },
+      { type: 'paragraph', content: 'Heat loss increases when using:' },
+      { type: 'list', items: ['Glass walls.', 'Stone surfaces.', 'Exterior walls.', 'Marble slabs.', 'High ceilings.'] },
+      { type: 'paragraph', content: 'For example:' },
+      { type: 'list', items: ['One full glass wall can increase required output by 30% or more.', 'Natural stone absorbs heat and delays steam saturation.'] },
+      { type: 'paragraph', content: 'Manufacturers publish adjustment charts. They must be used. Guessing leads to failure.' },
+      { type: 'paragraph', content: 'Field Failure #1: Generator sized only by room volume without accounting for glass and stone. Result: 20-minute heat-up times and disappointed clients.' },
+
+      { type: 'heading', content: '2. Ceiling Design and Condensation Control' },
+      { type: 'heading', content: 'Why Flat Ceilings Drip' },
+      { type: 'paragraph', content: 'Steam condenses on cooler surfaces. Without a sloped ceiling, condensation forms droplets that fall directly onto the occupant.' },
+      { type: 'paragraph', content: 'Best practice:' },
+      { type: 'list', items: ['Minimum 1/2 inch per foot slope.', 'Slope directed away from seating position.'] },
+      { type: 'paragraph', content: 'This is not aesthetic. It is comfort.' },
+      { type: 'paragraph', content: 'Field Failure #2: No ceiling slope. Result: rhythmic condensation dripping on shoulders and face.' },
+
+      { type: 'heading', content: '3. Steam Head Placement' },
+      { type: 'heading', content: 'Do Not Aim Steam at the Occupant' },
+      { type: 'paragraph', content: 'Steam heads discharge extremely hot vapor. During startup cycles, condensation can cause brief spurts of hot water.' },
+      { type: 'paragraph', content: 'Steam head placement rules:' },
+      { type: 'list', items: ['6-12 inches above finished floor.', 'Away from seating.', 'Not directly below bench.', 'Not opposite the primary seating position.', 'Avoid proximity to door opening.'] },
+      { type: 'paragraph', content: 'Field Failure #3: Steam head placed at bench height. Result: hot vapor directly contacting skin and discomfort during startup.' },
+      { type: 'paragraph', content: 'This mistake is more common than it should be.' },
+
+      { type: 'heading', content: '4. Insulation Requirements' },
+      { type: 'heading', content: 'Steam Without Insulation Is Waste' },
+      { type: 'paragraph', content: 'Steam showers must be treated as thermal envelopes.' },
+      { type: 'paragraph', content: 'Best practice:' },
+      { type: 'list', items: ['Full wall cavity insulation.', 'Insulated exterior walls.', 'Insulated ceiling.', 'Vapor barrier strategy per local code.', 'Waterproof membrane system behind finish material.'] },
+      { type: 'paragraph', content: 'Field Failure #4: No insulation in exterior wall cavity. Result: prolonged heat-up time, high energy use, moisture migration risk.' },
+      { type: 'paragraph', content: 'Steam is controlled heat. The enclosure must be designed to retain it.' },
+
+      { type: 'heading', content: '5. Electrical Requirements for Steam Generators' },
+      { type: 'paragraph', content: 'Most residential steam generators require:' },
+      { type: 'list', items: ['240V dedicated circuit.', 'Significant amperage draw depending on size.', 'Hardwired connection.', 'Service disconnect within sight.'] },
+      { type: 'paragraph', content: 'Load calculations must occur early in the design phase. Steam is not an afterthought.' },
+      { type: 'paragraph', content: 'Electrical oversight can delay projects weeks.' },
+      { type: 'paragraph', content: 'Field Failure #5: Generator specified late, panel capacity insufficient, requiring costly electrical upgrades.' },
+
+      { type: 'heading', content: '6. Drainage, Auto Flush, and Condensation Protection' },
+      { type: 'paragraph', content: 'This is where many projects quietly fail long term.' },
+      { type: 'heading', content: 'Auto Drain / Auto Flush' },
+      { type: 'paragraph', content: 'Mineral buildup from hard water significantly reduces generator life. An automatic drain valve flushes the tank after each cycle, reducing scale accumulation. On Long Island and throughout the Northeast, hard water makes this essential.' },
+      { type: 'heading', content: 'Condensation Tray' },
+      { type: 'paragraph', content: 'Generators should be installed over a drain pan or condensation tray where appropriate. Mechanical rooms are not immune to moisture.' },
+      { type: 'heading', content: 'Maintenance Access' },
+      { type: 'paragraph', content: 'The generator must be:' },
+      { type: 'list', items: ['Accessible.', 'Not entombed behind finished drywall.', 'Within manufacturer-recommended distance from steam head.'] },
+      { type: 'paragraph', content: 'Field Failure #6: Generator buried in millwork with no access panel. Result: invasive demolition for service.' },
+
+      { type: 'heading', content: '7. Door Gaps and Vapor Retention' },
+      { type: 'paragraph', content: 'Steam showers require proper door seals and controlled transom or minimal gap at bottom.' },
+      { type: 'paragraph', content: 'Too large a gap prevents full steam saturation. Too tight without ventilation planning can create moisture issues. Balance matters.' },
+
+      { type: 'heading', content: '8. Maximum Distance from Generator to Steam Head' },
+      { type: 'paragraph', content: 'Most manufacturers limit the maximum run length of steam piping.' },
+      { type: 'paragraph', content: 'Long runs:' },
+      { type: 'list', items: ['Increase condensation in line.', 'Delay steam delivery.', 'Reduce performance.'] },
+      { type: 'paragraph', content: 'Proper slope of steam line toward steam head prevents pooling.' },
+
+      { type: 'heading', content: '9. Health and Wellness Benefits of Steam Showers' },
+      { type: 'paragraph', content: 'Steam therapy has documented benefits including:' },
+      { type: 'list', items: ['Improved circulation.', 'Respiratory relief.', 'Muscle relaxation.', 'Stress reduction.', 'Skin hydration.', 'Post-workout recovery.'] },
+      { type: 'paragraph', content: 'But none of those benefits materialize if the system is poorly engineered.' },
+      { type: 'paragraph', content: 'Steam is not a spa fantasy. It is a controlled environment requiring architectural discipline.' },
+
+      { type: 'heading', content: '10. Material Selection and Heat Retention' },
+      { type: 'paragraph', content: 'Best-performing steam enclosures typically include:' },
+      { type: 'list', items: ['Porcelain tile.', 'Properly sealed stone.', 'Frameless glass with appropriate thickness.', 'Insulated framing.', 'Waterproof membrane system (e.g., sheet membrane).'] },
+      { type: 'paragraph', content: 'Large-format slabs require careful thermal consideration.' },
+
+      { type: 'heading', content: '11. Sequencing in Construction' },
+      { type: 'paragraph', content: 'Steam generators must be coordinated with:' },
+      { type: 'list', items: ['Rough plumbing.', 'Electrical rough-in.', 'Waterproofing.', 'Tile installation.', 'Cabinetry (if concealed).'] },
+      { type: 'paragraph', content: 'Late coordination causes rework.' },
+
+      { type: 'heading', content: '12. Maintenance Planning' },
+      { type: 'paragraph', content: 'Homeowners should understand:' },
+      { type: 'list', items: ['Periodic descaling may be required.', 'Water treatment improves longevity.', 'Access must remain available.', 'Auto flush is strongly recommended.'] },
+      { type: 'paragraph', content: 'Steam systems are durable when maintained. Neglected systems fail quietly.' },
+
+      { type: 'heading', content: 'Conclusion', subtitle: 'Steam Done Properly Is Architecture, Not Accessory' },
+      { type: 'paragraph', content: 'A residential steam shower is not about indulgence.' },
+      { type: 'paragraph', content: 'It is about ritual.\nIt is about recovery.\nIt is about creating a controlled environment within the home that supports longevity and daily reset.' },
+      { type: 'paragraph', content: 'When properly sized, insulated, drained, sloped, electrically supported, and thoughtfully placed, a steam shower performs reliably for years.' },
+      { type: 'paragraph', content: 'When treated casually, it becomes an expensive lesson in heat loss, moisture mismanagement, and retrofit regret.' },
+      { type: 'paragraph', content: 'Steam is not complicated.\nBut it is technical.\nAnd it demands early coordination between architect, designer, builder, electrician, and supplier.' },
+
+      { type: 'heading', content: 'A Note on Specification Support' },
+      { type: 'paragraph', content: 'At Iron & Water Co., we approach steam as a system, not a fixture.' },
+      { type: 'paragraph', content: 'That means reviewing cubic volume calculations, verifying material multipliers, confirming electrical load requirements, addressing water conditions, and coordinating installation details before walls are closed.' },
+      { type: 'paragraph', content: 'The goal is simple:\nA steam enclosure that performs exactly as designed on day one and continues to do so years later.' },
+      { type: 'paragraph', content: 'Submittal review and specification support available for active projects.' },
     ],
   },
 ]

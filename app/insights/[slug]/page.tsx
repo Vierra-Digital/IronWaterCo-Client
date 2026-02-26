@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: InsightPageProps): Promise<Me
     return { title: 'Insight Not Found' }
   }
 
+  const heroImage = insight.body.find((block) => block.type === 'image')?.src || '/logo-long.jpg'
+
   return {
     title: insight.title,
     description: insight.summary,
@@ -51,7 +53,7 @@ export async function generateMetadata({ params }: InsightPageProps): Promise<Me
       tags: [insight.category, 'architectural hardware', 'plumbing', 'design'],
       images: [
         {
-          url: `${siteUrl}/logo-long.jpg`,
+          url: `${siteUrl}${heroImage}`,
           width: 1200,
           height: 630,
           alt: `${insight.title} - Iron & Water Co.`,
@@ -62,7 +64,7 @@ export async function generateMetadata({ params }: InsightPageProps): Promise<Me
       card: 'summary_large_image',
       title: `${insight.title} | Iron & Water Co.`,
       description: insight.summary,
-      images: [`${siteUrl}/logo-long.jpg`],
+      images: [`${siteUrl}${heroImage}`],
       creator: '@ironandwaterco',
     },
     alternates: {
@@ -89,12 +91,14 @@ export default function InsightPage({ params }: InsightPageProps) {
     notFound()
   }
 
+  const heroImage = insight.body.find((block) => block.type === 'image')?.src || '/logo-long.jpg'
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: insight.title,
     description: insight.summary,
-    image: `${siteUrl}/logo-long.jpg`,
+    image: `${siteUrl}${heroImage}`,
     datePublished: insight.date,
     dateModified: insight.date,
     author: {
