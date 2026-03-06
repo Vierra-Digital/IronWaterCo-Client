@@ -75,6 +75,7 @@ const vendors = [
   'Rubinetterie Treeme',
   'Schaub & Company',
   'Schmidlin',
+  'Serdaneli',
   'Shaw\'s',
   'Simas',
   'Sterlingham',
