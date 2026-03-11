@@ -280,6 +280,141 @@ const vendorDetails: Record<string, VendorDetail> = {
     blurb: 'Premium food waste disposers and instant hot water dispensers that elevate kitchen hygiene and bring seamless convenience to refined living.',
     logoPath: '/vendor-logos/insinkerator.png',
   },
+  Jaclo: {
+    heading: 'Jaclo',
+    blurb: 'A family-owned manufacturer of high-end decorative plumbing fixtures, specializing in faucets, shower systems, grab bars, and accessories.',
+    logoPath: '/vendor-logos/jaclo.png',
+  },
+  Jorger: {
+    heading: 'Jorger',
+    blurb: 'A German house of precision with over a century of heritage, crafting luxury faucets and fittings where meticulous engineering, refined design, and enduring craftsmanship meet.',
+    logoPath: '/vendor-logos/jorger.png',
+  },
+  Kartners: {
+    heading: 'Kartners',
+    blurb: 'A Canadian design house crafting contemporary bathroom accessories and hardware with a distinctly European sensibility, where modern form meets refined craftsmanship.',
+    logoPath: '/vendor-logos/kartners.svg',
+  },
+  'Kingston Brass': {
+    heading: 'Kingston Brass',
+    blurb: 'A California design house crafting kitchen and bath fixtures in solid brass, where enduring craftsmanship meets a refined balance of vintage character and modern design.',
+    logoPath: '/vendor-logos/kingston-brass.png',
+  },
+  Laufen: {
+    heading: 'Laufen',
+    blurb: 'A Swiss design house since 1892, renowned for pioneering SaphirKeramik, creating refined ultra-thin bathroom ceramics and complete collections where precision engineering meets sculptural elegance.',
+    logoPath: '/vendor-logos/laufen.svg',
+  },
+  LinkaSink: {
+    heading: 'LinkaSink',
+    blurb: 'An artisan sink atelier creating distinctive kitchen and bath pieces in hand-hammered copper, brass, bronze, porcelain, stone, and mosaic, where craftsmanship and design become functional art.',
+    logoPath: '/vendor-logos/linkasink.png',
+  },
+  Madeli: {
+    heading: 'Madeli',
+    blurb: 'A Miami design house with Italian influence, crafting luxury bathroom furniture, vanities, and mirrors where European style meets modern function and refined craftsmanship.',
+    logoPath: '/vendor-logos/madeli.png',
+  },
+  'Maestro Bath': {
+    heading: 'Maestro Bath',
+    blurb: 'Presents handcrafted Italian bath fixtures for modern luxury, offering designer sinks, faucets, vanities, bathtubs, mirrors, and accessories defined by refined style and contemporary elegance.',
+    logoPath: '/vendor-logos/maestro-bath.svg',
+  },
+  'Matthew Studios': {
+    heading: 'Matthew Studios',
+    blurb: 'Matthew Studios is a Bronx-based, woman-owned design atelier creating bespoke lighting, hardware, and furniture, where each piece embodies artistry, sustainability, and quiet luxury.',
+    logoPath: '/vendor-logos/matthew-studios.png',
+  },
+  'Mountain Plumbing': {
+    heading: 'Mountain Plumbing Supply',
+    blurb: 'Based in Dallas, Texas, this luxury plumbing house crafts refined kitchen and bath accessories, from faucets and filtration to instant hot water systems and disposers, offered in a curated range of elegant finishes.',
+    logoPath: '/vendor-logos/mountain-plumbing.png',
+  },
+  'Mr. Steam': {
+    heading: 'Mr Steam',
+    blurb: 'A leader in luxury steam shower systems and spa technology, crafting advanced generators and wellness solutions that transform bathing into a true spa experience.',
+    logoPath: '/vendor-logos/mr-steam.svg',
+  },
+  'Perrin & Rowe': {
+    heading: 'Perrin & Rowe',
+    blurb: 'Born in Britain over four decades ago, Perrin & Rowe crafts exquisite hand-finished brassware for kitchens and baths, where heritage craftsmanship and timeless design meet enduring luxury.',
+    logoPath: '/vendor-logos/perrin-and-rowe.png',
+  },
+  Rajack: {
+    heading: 'Rajack',
+    blurb: 'An American heritage manufacturer, family-owned since 1939, renowned for precision-crafted architectural hardware, from pivot hinges to pocket door systems, where engineering excellence meets enduring design.',
+    logoPath: '/vendor-logos/rajack.png',
+  },
+  Riobel: {
+    heading: 'Riobel',
+    blurb: 'A Canadian design house crafting high-end kitchen and bath fittings, celebrated for modern geometric forms and engineering that delivers both durability and refined performance.',
+    logoPath: '/vendor-logos/riobel.png',
+  },
+  'Rubinetterie Treeme': {
+    heading: 'Rubinetterie Treemme',
+    blurb: 'Founded in Tuscany in 1968, this Italian house of luxury taps is celebrated for 100% Made in Italy craftsmanship. Blending traditional artistry with innovative design, each collection expresses modern elegance through refined brass and stainless-steel forms.',
+    logoPath: '/vendor-logos/rubinetterie-treeme.png',
+  },
+  'Schaub & Company': {
+    heading: 'Schaub & Company',
+    blurb: 'A premier manufacturer of decorative cabinet hardware, known for finely crafted knobs, pulls, and hinges that complete cabinetry with sophistication.',
+    logoPath: '/vendor-logos/schaub-and-company.png',
+  },
+  Schmidlin: {
+    heading: 'Schmidlin',
+    blurb: 'A Swiss manufacturer renowned for precision-crafted enameled steel bathtubs and shower trays, combining exceptional durability with refined European design.',
+    logoPath: '/vendor-logos/schmidlin.png',
+  },
+  Serdaneli: {
+    heading: 'Serdaneli',
+    blurb: 'Serdaneli is a French designer of bespoke bathroom fittings and hardware, renowned as haute couture for the home, crafted from marble, crystal, fine stone, and Limoges porcelain.',
+    logoPath: '/vendor-logos/serdaneli.png',
+  },
+  Simas: {
+    heading: 'Simas',
+    blurb: 'An Italian manufacturer of fine ceramic sanitary ware, offering toilets, washbasins, consoles, and bathroom furnishings crafted with the elegance and precision of true Made in Italy design.',
+    logoPath: '/vendor-logos/simas.png',
+  },
+  Sterlingham: {
+    heading: 'Sterlingham',
+    blurb: 'A distinguished British maker of handcrafted brass bathroom accessories, washstands, and towel warmers, defined by timeless design and exceptional craftsmanship.',
+    logoPath: '/vendor-logos/sterlingham.png',
+  },
+  'Studio Lux': {
+    heading: 'Studio Lux',
+    blurb: 'An internationally recognized architectural lighting studio based in St. Helena, California, creating transformative lighting designs that shape and elevate interior spaces.',
+    logoPath: '/vendor-logos/studio-lux.png',
+  },
+  Sugatsune: {
+    heading: 'Sugatsune',
+    blurb: 'A Japanese manufacturer and global distributor of precision-engineered hardware, known for exceptional quality, innovation, and performance.',
+    logoPath: '/vendor-logos/sugatsune.png',
+  },
+  'Vast Studio': {
+    heading: 'Vast Studio',
+    blurb: 'Drawing on ancient Moroccan techniques, this maker creates sculptural cementitious pieces crafted from micro-cement, quartz, and rich pigments, where tradition meets modern engineering and refined durability.',
+    logoPath: '/vendor-logos/vast-studio.png',
+  },
+  'Victoria & Albert': {
+    heading: 'Victoria & Albert',
+    blurb: 'Freestanding bathtubs and basins of exceptional luxury, handcrafted in South Africa from natural volcanic limestone, celebrated for their sculptural beauty and refined durability.',
+    logoPath: '/vendor-logos/victoria-and-albert.png',
+  },
+  'Vogue UK': {
+    heading: 'Vogue UK',
+    blurb: 'The countrys leading manufacturer of heated towel rails, designer radiators, and accessories, known for combining performance with refined design.',
+    logoPath: '/vendor-logos/vogue-uk.png',
+  },
+  Wasserwerk: {
+    heading: 'Wasserwerk',
+    blurb: 'A German manufacturer of premium kitchen faucets and accessories, distinguished by sustainable design, precision engineering, and refined performance.',
+    logoPath: '/vendor-logos/wasserwerk.png',
+  },
+  'Accurate Hardware': {
+    heading: 'Accurate Hardware',
+    blurb: 'A Connecticut-based manufacturer specializing in custom architectural and door hardware, crafting mortise locks, security solutions, and decorative ADA-compliant fittings with precision and reliability.',
+    logoPath: '/vendor-logos/accurate-hardware.png',
+  },
 }
 
 export default function VendorsSection() {
@@ -419,6 +554,12 @@ export default function VendorsSection() {
                     src={selectedVendorDetail.logoPath}
                     alt={`${selectedVendorDetail.heading} logo`}
                     className="vendor-detail-logo"
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
+                    onMouseDown={(e) => {
+                      if (e.button === 2) e.preventDefault()
+                    }}
                     onError={() => setLogoError((prev) => ({ ...prev, [selectedVendor || '']: true }))}
                   />
                 ) : (
