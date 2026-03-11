@@ -7,37 +7,34 @@ import Image from 'next/image'
 import 'swiper/css'
 
 export default function ReviewsSection() {
-  const reviews = [
+  const reviews: {
+    text: string
+    author: string
+    role: string
+    initials: string
+    imageSrc?: string
+  }[] = [
     {
-      text: "A partner who understood what we couldn't articulate.",
-      author: "Tara M.",
-      role: "Designer",
-      initials: "TM"
+      text: 'Richard\'s Dumbo showroom is a true one-stop shop for fixtures, tile, and hardware. He goes to great lengths to make projects successful, from home renovations to large-scale builds.',
+      author: 'Susan Vehaskari, MBA, LEED GA',
+      role: 'Regional Vice President - Durkan / Mohawk',
+      initials: 'SV',
+      imageSrc: '/testimonials/susan-vehaskari.png'
     },
     {
-      text: "Every detail anticipated, every deadline met.",
-      author: "Alan T.",
-      role: "Builder",
-      initials: "AT"
+      text: 'Richard is one of the most professional, reliable, and trustworthy people I\'ve worked with. His product knowledge helped close deals, and his integrity kept clients confident.',
+      author: 'Tamara D.',
+      role: 'Regional Account Manager | Certified Paralegal',
+      initials: 'TD',
+      imageSrc: '/testimonials/tamara-d.png'
     },
     {
-      text: "Transformative service. They elevated our entire vision.",
-      author: "Sarah K.",
-      role: "Architect",
-      initials: "SK"
+      text: 'Richard was amazing to work with. His design and sales experience is impressive, he listens closely, and he consistently guides clients to the right products for their needs.',
+      author: 'Gretchen Auer',
+      role: 'UX Designer and Writer',
+      initials: 'GA',
+      imageSrc: '/testimonials/gretchen-auer.png'
     },
-    {
-      text: "White-glove treatment from start to finish.",
-      author: "Michael R.",
-      role: "Homeowner",
-      initials: "MR"
-    },
-    {
-      text: "Attention to detail that's simply unmatched.",
-      author: "Jennifer L.",
-      role: "Designer",
-      initials: "JL"
-    }
   ]
 
   return (
@@ -72,7 +69,17 @@ export default function ReviewsSection() {
                     <p className="review-text">{review.text}</p>
                     <div className="review-author-info">
                       <div className="review-avatar" aria-hidden="true">
-                        <div className="review-avatar-initials">{review.initials}</div>
+                        {review.imageSrc ? (
+                          <Image
+                            src={review.imageSrc}
+                            alt={`${review.author} headshot`}
+                            width={48}
+                            height={48}
+                            className="review-avatar-image"
+                          />
+                        ) : (
+                          <div className="review-avatar-initials">{review.initials}</div>
+                        )}
                       </div>
                       <div className="review-author-details">
                         <p className="review-author">{review.author}</p>
