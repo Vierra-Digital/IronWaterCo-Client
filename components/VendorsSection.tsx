@@ -16,7 +16,6 @@ const vendors = [
   'Alno Inc',
   'Amba',
   'AquaBrass',
-  'AquaBrass Xpress',
   'Armadi Art',
   'Artos',
   'Ashley Norton',
@@ -107,13 +106,28 @@ const vendorDetails: Record<string, VendorDetail> = {
   },
   AquaBrass: {
     heading: 'AquaBrass',
-    blurb: 'Three decades in bath and kitchen, uniting distinctive design, premium materials, European elegance, and North American practicality.',
+    blurb: 'A Montreal-based designer and manufacturer of premium kitchen and bath fixtures, crafting refined faucets and shower systems defined by precision, performance, and modern elegance.',
     logoPath: '/vendor-logos/aquabrass.svg',
+  },
+  'Alno Inc': {
+    heading: 'Alno',
+    blurb: 'Known for designing and manufacturing high-quality decorative cabinet hardware, bathroom accessories, and mirrors defined by refined craftsmanship and timeless design.',
+    logoPath: '/vendor-logos/alno.png',
   },
   'Armadi Art': {
     heading: 'Armadi',
     blurb: 'Specializing in vanity design and decorative plumbing, offering creations for upscale urban living or romantic, emotive spaces.',
     logoPath: '/vendor-logos/armadi-art.png',
+  },
+  Artos: {
+    heading: 'Artos',
+    blurb: 'An Italian-inspired collection of plumbing fixtures, including faucets, showers, and towel warmers, defined by refined design and lasting quality.',
+    logoPath: '/vendor-logos/artos.png',
+  },
+  'Ashley Norton': {
+    heading: 'Ashley Norton',
+    blurb: 'This maker has crafted artisan architectural hardware in solid bronze and solid brass, offering door levers, knobs, cabinet pulls, and bath accessories defined by enduring craftsmanship and timeless design.',
+    logoPath: '/vendor-logos/ashley-norton.svg',
   },
   Axent: {
     heading: 'Axent',
@@ -129,6 +143,21 @@ const vendorDetails: Record<string, VendorDetail> = {
     heading: 'Barber Wilson',
     blurb: 'A British-owned manufacturer dedicated to crafting luxury brass bathroom hardware with timeless beauty and artisanal precision.',
     logoPath: '/vendor-logos/barber-wilsons.svg',
+  },
+  'Bates & Bates': {
+    heading: 'Bates & Bates',
+    blurb: 'Part of the Alno family of brands, Bates & Bates shares the same commitment to decorative hardware and bath accessories defined by refined craftsmanship and timeless design.',
+    logoPath: '/vendor-logos/bates-and-bates.png',
+  },
+  'Beloni Bagno': {
+    heading: 'Beloni Bagno',
+    blurb: 'A designer of premium bathroom cabinetry and furniture, creating customizable vanity collections distinguished by refined craftsmanship, modern style, and durable waterproof construction.',
+    logoPath: '/vendor-logos/beloni-bagno.svg',
+  },
+  Bemis: {
+    heading: 'Bemis',
+    blurb: 'A global leader in the design and manufacturing of premium toilet seats, known for innovation, comfort, and lasting quality.',
+    logoPath: '/vendor-logos/bemis.png',
   },
   Blanco: {
     heading: 'Blanco',
@@ -315,6 +344,11 @@ const vendorDetails: Record<string, VendorDetail> = {
     blurb: 'A Miami design house with Italian influence, crafting luxury bathroom furniture, vanities, and mirrors where European style meets modern function and refined craftsmanship.',
     logoPath: '/vendor-logos/madeli.png',
   },
+  'Mac Faucets': {
+    heading: 'Mac Faucets',
+    blurb: 'Founded on the fusion of technology and design, this brand creates refined sensor-activated faucets, soap dispensers, and flush valves that bring innovation and elegance to modern spaces.',
+    logoPath: '/vendor-logos/mac-faucets.png',
+  },
   'Maestro Bath': {
     heading: 'Maestro Bath',
     blurb: 'Presents handcrafted Italian bath fixtures for modern luxury, offering designer sinks, faucets, vanities, bathtubs, mirrors, and accessories defined by refined style and contemporary elegance.',
@@ -334,6 +368,11 @@ const vendorDetails: Record<string, VendorDetail> = {
     heading: 'Mr Steam',
     blurb: 'A leader in luxury steam shower systems and spa technology, crafting advanced generators and wellness solutions that transform bathing into a true spa experience.',
     logoPath: '/vendor-logos/mr-steam.svg',
+  },
+  Oatey: {
+    heading: 'Oatey',
+    blurb: 'A trusted manufacturer of plumbing products, including solvent cements, roof flashings, and drains designed for dependable performance.',
+    logoPath: '/vendor-logos/oatey.svg',
   },
   'Perrin & Rowe': {
     heading: 'Perrin & Rowe',
@@ -370,6 +409,11 @@ const vendorDetails: Record<string, VendorDetail> = {
     blurb: 'Serdaneli is a French designer of bespoke bathroom fittings and hardware, renowned as haute couture for the home, crafted from marble, crystal, fine stone, and Limoges porcelain.',
     logoPath: '/vendor-logos/serdaneli.png',
   },
+  'Shaw\'s': {
+    heading: 'Shaw\'s',
+    blurb: 'A prestigious British manufacturer handcrafting authentic fireclay sinks in Lancashire, England since 1897, renowned as the originator of the classic farmhouse sink and celebrated for enduring craftsmanship.',
+    logoPath: '/vendor-logos/shaws.svg',
+  },
   Simas: {
     heading: 'Simas',
     blurb: 'An Italian manufacturer of fine ceramic sanitary ware, offering toilets, washbasins, consoles, and bathroom furnishings crafted with the elegance and precision of true Made in Italy design.',
@@ -380,6 +424,11 @@ const vendorDetails: Record<string, VendorDetail> = {
     blurb: 'A distinguished British maker of handcrafted brass bathroom accessories, washstands, and towel warmers, defined by timeless design and exceptional craftsmanship.',
     logoPath: '/vendor-logos/sterlingham.png',
   },
+  StoneTouch: {
+    heading: 'Stone Touch',
+    blurb: 'A luxury Italian brand creating refined, sustainable bathroom fixtures, including freestanding bathtubs, vanities, and shower bases, where contemporary design meets responsible craftsmanship.',
+    logoPath: '/vendor-logos/stone-touch.png',
+  },
   'Studio Lux': {
     heading: 'Studio Lux',
     blurb: 'An internationally recognized architectural lighting studio based in St. Helena, California, creating transformative lighting designs that shape and elevate interior spaces.',
@@ -389,6 +438,11 @@ const vendorDetails: Record<string, VendorDetail> = {
     heading: 'Sugatsune',
     blurb: 'A Japanese manufacturer and global distributor of precision-engineered hardware, known for exceptional quality, innovation, and performance.',
     logoPath: '/vendor-logos/sugatsune.png',
+  },
+  'Trim to the Trade': {
+    heading: 'Trim to the Trade',
+    blurb: 'A specialized manufacturer of high-quality decorative plumbing products and rare finishing components, offering refined solutions for distinctive kitchen and bath installations.',
+    logoPath: '/vendor-logos/trim-to-the-trade.png',
   },
   'Vast Studio': {
     heading: 'Vast Studio',
