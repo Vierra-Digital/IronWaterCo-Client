@@ -132,23 +132,6 @@ export default function TeamSection() {
             </div>
           </article>
           
-          <article
-            ref={(el) => { membersRef.current[4] = el; }}
-            className="team-member fade-in"
-            role="listitem"
-            itemScope
-            itemType="https://schema.org/Person"
-          >
-            <div className="team-card">
-              <div className="team-photo-wrapper">
-                <div className="team-photo" aria-label="Carissa Ahearn">C</div>
-              </div>
-              <div className="team-info">
-                <h3 itemProp="name">Carissa Ahearn</h3>
-                <p className="team-role" itemProp="jobTitle">Operations</p>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
