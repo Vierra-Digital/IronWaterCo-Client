@@ -20,18 +20,30 @@ export default function InsightContent({ insight }: InsightContentProps) {
   useEffect(() => {
     setIsVisible(true)
 
-    if (window.innerWidth > 768) {
-      const handleScroll = () => {
-        if (headerRef.current && bodyRef.current) {
-          const scrolled = window.pageYOffset
-          const rate = scrolled * 0.2
-          headerRef.current.style.transform = `translateY(${rate}px)`
-          bodyRef.current.style.transform = `translateY(${-rate * 0.1}px)`
-        }
-      }
+    if (window.innerWidth <= 768) return
 
-      window.addEventListener('scroll', handleScroll)
-      return () => window.removeEventListener('scroll', handleScroll)
+    const handleScroll = () => {
+      if (!headerRef.current || !bodyRef.current || !contentRef.current) return
+
+      // Calculate parallax relative to this article so offsets stay bounded.
+      const articleTop = contentRef.current.offsetTop
+      const localScroll = Math.max(0, window.scrollY - articleTop)
+
+      // Keep both layers moving down at different speeds to avoid overlap.
+      const headerOffset = Math.min(localScroll * 0.08, 56)
+      const bodyOffset = Math.min(localScroll * 0.03, 24)
+
+      headerRef.current.style.transform = `translate3d(0, ${headerOffset}px, 0)`
+      bodyRef.current.style.transform = `translate3d(0, ${bodyOffset}px, 0)`
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (headerRef.current) headerRef.current.style.transform = ''
+      if (bodyRef.current) bodyRef.current.style.transform = ''
     }
   }, [])
 
