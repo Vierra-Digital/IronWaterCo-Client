@@ -71,33 +71,6 @@ export default function TeamSection() {
               <div className="team-photo-wrapper">
                 <div className="team-photo team-photo-image">
                   <Image 
-                    src="/Raynny-Soto.jpeg" 
-                    alt="Raynny Soto Rodriguez - Principal at Iron & Water Co. Architectural Hardware & Plumbing" 
-                    width={100} 
-                    height={100} 
-                    style={{ objectFit: 'cover' }}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <div className="team-info">
-                <h3 itemProp="name">Raynny Soto Rodriguez</h3>
-                <p className="team-role" itemProp="jobTitle">Principal</p>
-              </div>
-            </div>
-          </article>
-          
-          <article
-            ref={(el) => { membersRef.current[2] = el; }}
-            className="team-member fade-in"
-            role="listitem"
-            itemScope
-            itemType="https://schema.org/Person"
-          >
-            <div className="team-card">
-              <div className="team-photo-wrapper">
-                <div className="team-photo team-photo-image">
-                  <Image 
                     src="/alex-shick.JPG" 
                     alt="Alex Shick - IT & Systems Specialist at Iron & Water Co. Architectural Hardware Showroom" 
                     width={100} 
@@ -115,7 +88,7 @@ export default function TeamSection() {
           </article>
           
           <article
-            ref={(el) => { membersRef.current[3] = el; }}
+            ref={(el) => { membersRef.current[2] = el; }}
             className="team-member fade-in"
             role="listitem"
             itemScope
