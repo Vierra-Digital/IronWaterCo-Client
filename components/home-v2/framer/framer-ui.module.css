@@ -1,0 +1,269 @@
+/* Iron & Water — Framer design system (exported parity) */
+
+.panel {
+  width: 100%;
+  max-height: min(88vh, 760px);
+  overflow-y: auto;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  border-radius: 0;
+  background: rgba(26, 31, 46, 0.88);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.heroBeat {
+  position: relative;
+  max-width: min(640px, 90vw);
+}
+
+.heroScrim {
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  background: linear-gradient(
+    105deg,
+    rgba(10, 14, 26, 0.88) 0%,
+    rgba(10, 14, 26, 0.5) 50%,
+    transparent 78%
+  );
+  border-radius: 0;
+}
+
+.label {
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-size: max(0.6875rem, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a96e;
+  margin: 0 0 0.75rem;
+}
+
+.heroHeadline {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  line-height: 1.05;
+  color: #f5f0eb;
+  margin: 0;
+  max-width: 14ch;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.85);
+}
+
+.bodyLarge {
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.65;
+  color: rgba(245, 240, 235, 0.88);
+  margin: 0.75rem 0 0;
+  max-width: 38ch;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.75);
+}
+
+.manifesto {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  line-height: 1.2;
+  color: #c9a96e;
+  font-style: italic;
+  margin: 0;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  margin-top: 1.25rem;
+  padding: 1rem 2.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #c9a96e;
+  color: #0a0e1a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 12px;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.sectionHeader {
+  margin-bottom: 1rem;
+}
+
+.displayTitle {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  color: #fff;
+  margin: 0.25rem 0 0;
+}
+
+.serviceCard {
+  min-height: 200px;
+  padding: 2.5rem 2rem;
+  border-radius: 4px;
+  background: rgba(26, 31, 46, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.serviceCardActive {
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 0 48px rgba(212, 175, 55, 0.15);
+}
+
+.serviceIndex {
+  font-size: 0.75rem;
+  color: #c9a96e;
+  letter-spacing: 0.15em;
+  margin: 0 0 1rem;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+}
+
+.serviceTitle {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.75rem;
+  color: #fff;
+  margin: 0 0 0.75rem;
+}
+
+.serviceDesc {
+  color: rgba(245, 240, 235, 0.65);
+  line-height: 1.65;
+  margin: 0;
+  font-size: 1rem;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+}
+
+.testimonialQuote {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.5;
+  color: #fff;
+  margin: 0 0 1.5rem;
+  max-width: 42rem;
+}
+
+.testimonialAuthor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.testimonialAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #d4af37;
+  flex-shrink: 0;
+}
+
+.testimonialName {
+  color: #fff;
+  font-weight: 600;
+  margin: 0;
+  text-align: left;
+}
+
+.testimonialRole {
+  font-size: 0.85rem;
+  color: rgba(245, 240, 235, 0.65);
+  margin: 0.25rem 0 0;
+  text-align: left;
+}
+
+.teamCard {
+  padding: 1.5rem 1rem;
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  border-radius: 4px;
+  background: rgba(26, 31, 46, 0.5);
+}
+
+.teamPhoto {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+  border: 2px solid #d4af37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: #c9a96e;
+}
+
+.teamName {
+  color: #fff;
+  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+}
+
+.teamRole {
+  color: #c9a96e;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Lightweight scene captions (no full glass box) */
+.captionRoot {
+  max-width: min(520px, 92vw);
+  padding: clamp(1rem, 2.5vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+  background: linear-gradient(
+    105deg,
+    rgba(10, 14, 26, 0.82) 0%,
+    rgba(10, 14, 26, 0.45) 55%,
+    transparent 100%
+  );
+}
+
+.captionLeft {
+  margin-right: auto;
+}
+
+.captionCenter {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background: linear-gradient(
+    0deg,
+    rgba(10, 14, 26, 0.85) 0%,
+    rgba(10, 14, 26, 0.35) 70%,
+    transparent 100%
+  );
+}
+
+.captionRight {
+  margin-left: auto;
+  text-align: right;
+}
+
+.captionEyebrow {
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-size: max(0.6875rem, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a96e;
+  margin: 0 0 0.5rem;
+}
+
+.captionTitle {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  color: #f5f0eb;
+  margin: 0;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+}

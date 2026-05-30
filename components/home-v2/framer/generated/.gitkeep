@@ -1,0 +1,2 @@
+# unframer CLI output (requires React Export subscription)
+# npx -y unframer@latest 642655a4e6a20fc0 --out ./components/home-v2/framer/generated
