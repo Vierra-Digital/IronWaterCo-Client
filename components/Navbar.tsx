@@ -26,8 +26,7 @@ export default function Navbar({ activePage = 'home' }: NavbarProps) {
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    const homePaths = ['/', '/home-v2']
-    if (homePaths.includes(pathname)) {
+    if (pathname === '/') {
       const contactSection = document.getElementById('contact')
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: 'smooth' })
