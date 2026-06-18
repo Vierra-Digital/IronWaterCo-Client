@@ -74,7 +74,6 @@ const vendors = [
   'P&Bhusri',
   'Perrin & Rowe',
   'Produits Neptune',
-  'Rajack',
   'Riobel',
   'Rocky Mountain',
   'House Of Rohl',
@@ -387,11 +386,6 @@ const vendorDetails: Record<string, VendorDetail> = {
     heading: 'Perrin & Rowe',
     blurb: 'Born in Britain over four decades ago, Perrin & Rowe crafts exquisite hand-finished brassware for kitchens and baths, where heritage craftsmanship and timeless design meet enduring luxury.',
     logoPath: '/vendor-logos/perrin-and-rowe.png',
-  },
-  Rajack: {
-    heading: 'Rajack',
-    blurb: 'An American heritage manufacturer, family-owned since 1939, renowned for precision-crafted architectural hardware, from pivot hinges to pocket door systems, where engineering excellence meets enduring design.',
-    logoPath: '/vendor-logos/rajack.png',
   },
   Riobel: {
     heading: 'Riobel',
