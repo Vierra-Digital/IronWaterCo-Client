@@ -6,9 +6,10 @@ import { notFound } from 'next/navigation'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironandwaterco.com'
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   try {
-    const productIdentifier = decodeURIComponent(params.id)
+    const { id } = await params
+    const productIdentifier = decodeURIComponent(id)
     const response = await fetch(`${siteUrl}/api/cin7/products/${encodeURIComponent(productIdentifier)}`, {
       cache: 'no-store',
     })
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       openGraph: {
         title: `${product.name} | Iron & Water Co.`,
         description: product.description || `View ${product.name} at Iron & Water Co.`,
-        url: `${siteUrl}/store/${params.id}`,
+        url: `${siteUrl}/store/${id}`,
         siteName: 'Iron & Water Co.',
         type: 'website',
         images: product.images && product.images.length > 0 ? [product.images[0]] : [`${siteUrl}/logo-long.jpg`],
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
         creator: '@ironandwaterco',
       },
       alternates: {
-        canonical: `${siteUrl}/store/${params.id}`,
+        canonical: `${siteUrl}/store/${id}`,
       },
     }
   } catch {
@@ -59,7 +60,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   let product = null
 
   try {
@@ -78,7 +80,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     } else {
       baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironandwaterco.com'
     }
-    const productIdentifier = decodeURIComponent(params.id)
+    const productIdentifier = decodeURIComponent(id)
     const apiUrl = `${baseUrl}/api/cin7/products/${encodeURIComponent(productIdentifier)}`
     const response = await fetch(apiUrl, {
       cache: 'no-store',
@@ -109,7 +111,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    '@id': `${siteUrl}/store/${params.id}#product`,
+    '@id': `${siteUrl}/store/${id}#product`,
     name: product.name,
     sku: product.sku,
     description: product.description,
@@ -133,7 +135,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
       { '@type': 'ListItem', position: 2, name: 'Store', item: `${siteUrl}/store` },
-      { '@type': 'ListItem', position: 3, name: product.name, item: `${siteUrl}/store/${params.id}` },
+      { '@type': 'ListItem', position: 3, name: product.name, item: `${siteUrl}/store/${id}` },
     ],
   }
 

@@ -8,7 +8,7 @@ import type { Metadata } from 'next'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironandwaterco.com'
 
 interface InsightPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: InsightPageProps): Promise<Metadata> {
-  const { slug } = params
+  const { slug } = await params
   const insight = insights.find((i) => i.slug === slug)
 
   if (!insight) {
@@ -83,8 +83,8 @@ export async function generateMetadata({ params }: InsightPageProps): Promise<Me
   }
 }
 
-export default function InsightPage({ params }: InsightPageProps) {
-  const { slug } = params
+export default async function InsightPage({ params }: InsightPageProps) {
+  const { slug } = await params
   const insight = insights.find((i) => i.slug === slug)
 
   if (!insight) {
