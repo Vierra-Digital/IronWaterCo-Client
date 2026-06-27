@@ -4,14 +4,16 @@ import { fetchCin7Data } from '@/lib/cin7Api'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  let productIdentifier = ''
   try {
-    let productIdentifier = params.id
+    const { id } = await params
+    productIdentifier = id
     try {
-      productIdentifier = decodeURIComponent(params.id)
+      productIdentifier = decodeURIComponent(id)
     } catch {
-      productIdentifier = params.id
+      productIdentifier = id
     }
 
     if (!productIdentifier) {
@@ -226,7 +228,7 @@ export async function GET(
         success: false,
         error: 'Failed to fetch product',
         message: error.message || 'Unknown error',
-        productIdentifier: params.id,
+        productIdentifier,
       },
       { status: 500 }
     )
